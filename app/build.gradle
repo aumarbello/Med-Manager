@@ -1,20 +1,25 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compiledSdk
     defaultConfig {
         applicationId "com.khattabu.med_manager"
-        minSdkVersion 17
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minimumSdk
+        targetSdkVersion rootProject.ext.targetSdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions{
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 
     lintOptions {
@@ -23,9 +28,77 @@ android {
 }
 
 dependencies {
+    def supportLibDep = rootProject.ext.supportDependencies
+    def daggerDep = rootProject.ext.daggerDependencies
+    def butterKnifeDep = rootProject.ext.butterKnifeDependencies
+    def archComponentsDep = rootProject.ext.archComponents
+    def otherDep = rootProject.ext.otherDependencies
+    def testDep = rootProject.ext.testDependencies
+    def espressoExclude = rootProject.ext.espressoExcludeGroups
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation supportLibDep.appCompat
+    implementation supportLibDep.support
+    implementation supportLibDep.design
+    implementation supportLibDep.cardView
+    implementation supportLibDep.recyclerView
+
+    implementation daggerDep.dagger
+    annotationProcessor daggerDep.daggerApt
+
+    implementation butterKnifeDep.butterKnife
+    implementation butterKnifeDep.butterKnifeApt
+
+    implementation archComponentsDep.extensions
+    implementation archComponentsDep.liveDataRx
+    implementation archComponentsDep.java8Lifecycle
+    implementation archComponentsDep.room
+    implementation archComponentsDep.roomRxJava
+    annotationProcessor archComponentsDep.roomProcessor
+    implementation archComponentsDep.paging
+    implementation archComponentsDep.pagingRx
+
+    implementation otherDep.constraintLayout
+    implementation otherDep.caligraphy
+    implementation otherDep.fireBaseCore
+    implementation otherDep.timber
+    implementation otherDep.googleLogin
+    implementation otherDep.sectionCalenderView
+
+    implementation(otherDep.crashlytics) {
+        transitive = true
+    }
+
+    testImplementation testDep.jUnit
+    testImplementation testDep.mockito
+    testImplementation testDep.liveData
+    testImplementation testDep.roomTesting
+    testAnnotationProcessor daggerDep.daggerApt
+    androidTestImplementation testDep.espressoCore
+    androidTestImplementation testDep.espressoContrib
+    androidTestImplementation testDep.espressoIntents
+    androidTestImplementation testDep.espressoIdlingRes
+    androidTestImplementation testDep.testRunner
+
+    androidTestImplementation(testDep.espressoCore, {
+        exclude group: espressoExclude.group1, module: espressoExclude.module1
+        exclude group: espressoExclude.group2, module: espressoExclude.module2
+        exclude group: espressoExclude.group3, module: espressoExclude.module3
+        exclude group: espressoExclude.group4, module: espressoExclude.module4
+        exclude group: espressoExclude.group5, module: espressoExclude.module5
+    })
+
+    androidTestImplementation(testDep.espressoContrib, {
+        exclude group: espressoExclude.group1, module: espressoExclude.module1
+        exclude group: espressoExclude.group2, module: espressoExclude.module2
+        exclude group: espressoExclude.group3, module: espressoExclude.module3
+        exclude group: espressoExclude.group4, module: espressoExclude.module4
+        exclude group: espressoExclude.group5, module: espressoExclude.module5
+    })
+
+    androidTestImplementation(testDep.espressoIntents, {
+        exclude group: espressoExclude.group1, module: espressoExclude.module1
+    })
 }
+
+apply plugin: 'com.google.gms.google-services'

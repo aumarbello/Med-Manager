@@ -1,0 +1,103 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+//defining versions in one place to avoid version conflicts
+ext {
+    //appVersions
+    versionMajor = 14
+    versionMinor = 8
+    versionPatch = 6
+    versionClassifier = null
+    isSnapshot = false
+
+    //Versions
+    buildToolVersion = '27.0.2'
+    minimumSdk = 17
+    targetSdk = 27
+    compiledSdk = 27
+
+    // Library versions
+    supportLibraryVersion = '27.1.0'
+    dagger2Version = '2.9'
+    butterKnifeVersion = '8.8.1'
+    constraintLayoutVersion = '1.0.2'
+    caligraphyVersion = '2.3.0'
+    fireBaseVersion = '11.8.0'
+    crashlyticsVersion = '2.9.1@aar'
+    timberVersion = '4.7.0'
+    sectionCalenderVersion = '1.0.5.1'
+    playServicesVersion = '11.8.0'
+    archExtensionVersion = '1.1.1'
+    roomVersion = '1.1.0-beta2'
+    pagingVersion = '1.0.0-beta1'
+    pagingRxVersion = '1.0.0-alpha1'
+
+    //Test versions
+    jUnitVersion = '4.12'
+    mockitoVersion = '2.12.0'
+    espressoVersion = '3.0.2-alpha1'
+    okHttpIdlingVersion = '1.0.0'
+    testRunnerVersion = '1.0.2-alpha1'
+
+    // Library dependencies
+    supportDependencies = [
+            appCompat       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            support         : "com.android.support:support-v4:${supportLibraryVersion}",
+            design          : "com.android.support:design:${supportLibraryVersion}",
+            cardView        : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            recyclerView    : "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+    ]
+
+    daggerDependencies = [
+            dagger   : "com.google.dagger:dagger:${dagger2Version}",
+            daggerApt: "com.google.dagger:dagger-compiler:${dagger2Version}"
+    ]
+
+    butterKnifeDependencies = [
+            butterKnife   : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterKnifeApt: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}"
+    ]
+
+    archComponents = [
+            extensions : "android.arch.lifecycle:extensions:${archExtensionVersion}",
+            liveDataRx : "android.arch.lifecycle:reactivestreams:${archExtensionVersion}",
+            java8Lifecycle : "android.arch.lifecycle:common-java8:${archExtensionVersion}",
+            room : "android.arch.persistence.room:runtime:${roomVersion}",
+            roomRxJava : "android.arch.persistence.room:rxjava2:${roomVersion}",
+            roomProcessor : "android.arch.persistence.room:compiler:${roomVersion}",
+            paging : "android.arch.paging:runtime:${pagingVersion}",
+            pagingRx : "android.arch.paging:rxjava2:${pagingRxVersion}"
+    ]
+
+    otherDependencies = [
+            constraintLayout : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            caligraphy : "uk.co.chrisjenx:calligraphy:${caligraphyVersion}",
+            fireBaseCore : "com.google.firebase:firebase-core:${fireBaseVersion}",
+            crashlytics : "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}",
+            timber : "com.jakewharton.timber:timber:${timberVersion}",
+            googleLogin : "com.google.android.gms:play-services-auth:${playServicesVersion}",
+            sectionCalenderView : "com.github.WindSekirun:SectionCalendarView:${sectionCalenderVersion}"
+    ]
+
+    testDependencies = [
+            jUnit : "junit:junit:${jUnitVersion}",
+            mockito : "org.mockito:mockito-core:${mockitoVersion}",
+            espressoCore : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            espressoContrib : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
+            espressoIntents : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
+            espressoIdlingRes : "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+            testRunner : "com.android.support.test:runner:${testRunnerVersion}",
+            liveData : "android.arch.core:core-testing:${archExtensionVersion}",
+            roomTesting : "android.arch.persistence.room:testing:${roomVersion}"
+    ]
+
+    espressoExcludeGroups = [
+            group1: "com.android.support", module1: "support-annotations",
+            group2: "com.android.support", module2: "support-v4",
+            group3: "com.android.support", module3: "appcompat-v7",
+            group4: "com.android.support", module4: "design",
+            group5: "com.android.support", module5: "recyclerview-v7",
+    ]
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_splash"
+    android:alpha="0.75"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_app_title"
+        android:layout_marginStart="@dimen/side_margin_large"
+        android:layout_marginEnd="@dimen/side_margin_large"
+        android:layout_marginTop="@dimen/large_margin"
+        android:contentDescription="@string/app_info"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_address"
+        android:hint="@string/email_address"
+        android:textSize="23sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/btn_curved_white"
+        android:layout_marginTop="@dimen/side_margin_large"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:minHeight="@dimen/large_margin"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:hint="@string/password"
+        android:textSize="23sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:background="@drawable/btn_curved_white"
+        android:layout_marginTop="@dimen/side_margin_large"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:minHeight="@dimen/large_margin"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/side_margin_normal"
+        android:text="@string/login"
+        android:textSize="20sp"
+        android:paddingStart="@dimen/large_margin"
+        android:paddingEnd="@dimen/large_margin"
+        android:background="@drawable/btn_curved_blue"
+        />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/side_margin_normal"
+        />
+</LinearLayout>

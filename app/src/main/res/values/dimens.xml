@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="large_margin">60dp</dimen>
+    <dimen name="side_margin_normal">20dp</dimen>
+    <dimen name="side_margin_large">35dp</dimen>
+</resources>

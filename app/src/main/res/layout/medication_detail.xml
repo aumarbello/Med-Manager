@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/medication_desc"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_normal"
+        tools:text="Ulcer Medication"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:text="@string/period_active"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_normal"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/period_active"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_small"
+        tools:text="2 Weeks."
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:text="@string/period_left"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_normal"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/period_left"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_small"
+        tools:text="2 Months."
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:text="@string/medication_range"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_normal"
+        />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_date_label"
+            android:textSize="15sp"
+            android:text="@string/start_date"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/end_date_label"
+            android:textSize="15sp"
+            android:text="@string/end_date"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_date"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/start_date_label"
+            tools:text="21/04/2019"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/end_date"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/end_date_label"
+            tools:text="2/05/2019"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:text="@string/interval"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_normal"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/interval"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/side_margin_normal"
+        android:layout_marginEnd="@dimen/side_margin_normal"
+        android:layout_marginTop="@dimen/side_margin_small"
+        tools:text="8 Hours."
+        />
+</LinearLayout>

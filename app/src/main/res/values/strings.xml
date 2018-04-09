@@ -6,4 +6,9 @@
     <string name="login">Login</string>
     <string name="date_added">Date Added</string>
     <string name="interval">Interval</string>
+    <string name="period_active">Period Active:</string>
+    <string name="period_left">Period Left</string>
+    <string name="medication_range">Medication Range</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
 </resources>

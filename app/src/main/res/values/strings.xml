@@ -11,4 +11,12 @@
     <string name="medication_range">Medication Range</string>
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="first_name">First Name</string>
+    <string name="medication_info">Medication Information</string>
+    <string name="total_medications">Total Medications:</string>
+    <string name="highest_medication">Highest Medication (By Month)</string>
+    <string name="next_medication">Next Medication</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="last_name">Last Name</string>
 </resources>

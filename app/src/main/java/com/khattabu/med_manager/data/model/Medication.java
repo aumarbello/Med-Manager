@@ -25,7 +25,7 @@ public class Medication {
     private int intervalValue;
     private String intervalType;
 
-    public Medication(String medicationId, String title,
+    public Medication(@NonNull String medicationId, String title,
                       String month, String desc,
                       long dateAdded, long startDate,
                       long endDate, int intervalValue,
@@ -59,6 +59,7 @@ public class Medication {
     }
 
 
+    @NonNull
     public String getMedicationId() {
         return medicationId;
     }

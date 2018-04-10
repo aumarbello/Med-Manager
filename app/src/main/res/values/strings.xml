@@ -19,4 +19,8 @@
     <string name="next_medication">Next Medication</string>
     <string name="save_changes">Save Changes</string>
     <string name="last_name">Last Name</string>
+    <string name="title">Title</string>
+    <string name="desc">Description</string>
+    <string name="value">Value</string>
+    <string name="add_medication">Add Medication</string>
 </resources>

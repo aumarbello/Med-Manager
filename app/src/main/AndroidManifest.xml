@@ -19,5 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.login.LoginActivity" />
+        <activity android:name=".presentation.add.AddMedicationActivity" />
+        <activity android:name=".presentation.detail.DetailActivity" />
+        <activity android:name=".presentation.profile.ProfileActivity" />
     </application>
 </manifest>

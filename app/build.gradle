@@ -47,7 +47,7 @@ dependencies {
     annotationProcessor daggerDep.daggerApt
 
     implementation butterKnifeDep.butterKnife
-    implementation butterKnifeDep.butterKnifeApt
+    annotationProcessor butterKnifeDep.butterKnifeApt
 
     implementation archComponentsDep.extensions
     implementation archComponentsDep.liveDataRx
@@ -60,14 +60,9 @@ dependencies {
 
     implementation otherDep.constraintLayout
     implementation otherDep.caligraphy
-    implementation otherDep.fireBaseCore
     implementation otherDep.timber
     implementation otherDep.googleLogin
     implementation otherDep.sectionCalenderView
-
-    implementation(otherDep.crashlytics) {
-        transitive = true
-    }
 
     testImplementation testDep.jUnit
     testImplementation testDep.mockito
@@ -101,4 +96,4 @@ dependencies {
     })
 }
 
-apply plugin: 'com.google.gms.google-services'
+

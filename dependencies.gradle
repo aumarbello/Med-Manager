@@ -24,8 +24,6 @@ ext {
     butterKnifeVersion = '8.8.1'
     constraintLayoutVersion = '1.0.2'
     caligraphyVersion = '2.3.0'
-    fireBaseVersion = '11.8.0'
-    crashlyticsVersion = '2.9.1@aar'
     timberVersion = '4.7.0'
     sectionCalenderVersion = '1.0.5.1'
     playServicesVersion = '11.8.0'
@@ -74,8 +72,6 @@ ext {
     otherDependencies = [
             constraintLayout : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
             caligraphy : "uk.co.chrisjenx:calligraphy:${caligraphyVersion}",
-            fireBaseCore : "com.google.firebase:firebase-core:${fireBaseVersion}",
-            crashlytics : "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}",
             timber : "com.jakewharton.timber:timber:${timberVersion}",
             googleLogin : "com.google.android.gms:play-services-auth:${playServicesVersion}",
             sectionCalenderView : "com.github.WindSekirun:SectionCalendarView:${sectionCalenderVersion}"

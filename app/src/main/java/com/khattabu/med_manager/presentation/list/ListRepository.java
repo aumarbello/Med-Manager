@@ -1,9 +1,6 @@
 package com.khattabu.med_manager.presentation.list;
 
-import android.content.Context;
-
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
-import com.khattabu.med_manager.data.local.db.MedicationDatabase;
 import com.khattabu.med_manager.data.model.Medication;
 
 import java.util.List;
@@ -20,8 +17,8 @@ public class ListRepository {
     private final MedicationDAO dao;
 
     @Inject
-    public ListRepository(Context context) {
-        dao = MedicationDatabase.getDatabase(context).medicationDAO();
+    public ListRepository(MedicationDAO dao) {
+        this.dao = dao;
     }
 
     List<Medication> getAllMedication(){

@@ -50,42 +50,17 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/side_margin_normal"
-            android:layout_marginLeft="@dimen/side_margin_normal"
-            android:layout_marginRight="@dimen/side_margin_normal"
-            android:weightSum="2"
-            >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/start_date_label"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:text="@string/start_date"
-                android:layout_marginTop="@dimen/side_margin_small"
-                android:drawableStart="@drawable/ic_date_range_black_24dp"
-                android:drawablePadding="@dimen/side_margin_small"
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/end_date_label"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:text="@string/end_date"
-                android:layout_marginTop="@dimen/side_margin_small"
-                android:drawableStart="@drawable/ic_date_range_black_24dp"
-                android:drawablePadding="@dimen/side_margin_small"
-                />
-        </LinearLayout>
+            android:id="@+id/select_date"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="@string/select_date"
+            android:layout_margin="@dimen/side_margin_normal"
+            android:drawableStart="@drawable/ic_date_range_black_24dp"
+            android:drawablePadding="@dimen/side_margin_small"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,6 +124,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/side_margin_small"
+                android:entries="@array/interval"
                 />
         </LinearLayout>
     </LinearLayout>

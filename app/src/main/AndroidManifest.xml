@@ -22,5 +22,6 @@
         <activity android:name=".presentation.add.AddMedicationActivity" />
         <activity android:name=".presentation.detail.DetailActivity" />
         <activity android:name=".presentation.profile.ProfileActivity" />
+        <activity android:name=".presentation.list.MedicationList" />
     </application>
 </manifest>

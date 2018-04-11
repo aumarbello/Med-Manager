@@ -23,4 +23,7 @@
     <string name="desc">Description</string>
     <string name="value">Value</string>
     <string name="add_medication">Add Medication</string>
+    <string name="edit_medication">Edit Medication</string>
+    <string name="delete_medication">Delete Medication</string>
+    <string name="select_date">Select Date</string>
 </resources>

@@ -5,13 +5,14 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by ahmed on 4/8/18.
  */
 @Entity
-public class Medication {
+public class Medication implements Serializable{
     @NonNull
     @PrimaryKey
     private String medicationId;

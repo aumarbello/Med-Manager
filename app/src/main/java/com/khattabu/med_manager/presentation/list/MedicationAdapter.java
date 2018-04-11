@@ -12,7 +12,6 @@ import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.utils.DateUtils;
 
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,9 +80,8 @@ class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Medicatio
 
             dateAdded.setText(DateUtils.dateLongToString(medic.getDateAdded()));
 
-            String intervalString = String.format(Locale.getDefault(), "%d %s",
-                    medic.getIntervalValue(), medic.getIntervalType());
-            interval.setText(intervalString);
+            interval.setText(DateUtils.getInterval(medic.getIntervalValue(),
+                    medic.getIntervalType()));
         }
     }
 }

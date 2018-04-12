@@ -42,14 +42,14 @@ public class Medication implements Serializable{
     private String intervalType;
 
     public Medication(@NonNull String medicationId, String title,
-                      String month, String desc,
+                      String month, String description,
                       long dateAdded, long startDate,
                       long endDate, int intervalValue,
                       String intervalType){
         this.medicationId = medicationId;
         this.title = title;
         this.month = month;
-        this.description = desc;
+        this.description = description;
         this.dateAdded = dateAdded;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -59,14 +59,14 @@ public class Medication implements Serializable{
 
     @Ignore
     public Medication(String title,
-                      String month, String desc,
+                      String month, String description,
                       long dateAdded, long startDate,
                       long endDate, int intervalValue,
                       String intervalType){
         this.medicationId = UUID.randomUUID().toString();
         this.title = title;
         this.month = month;
-        this.description = desc;
+        this.description = description;
         this.dateAdded = dateAdded;
         this.startDate = startDate;
         this.endDate = endDate;

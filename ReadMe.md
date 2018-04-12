@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/aumarbello/Med-Manager.svg?branch=master)](https://travis-ci.org/aumarbello/Med-Manager)
+[![CircleCI](https://circleci.com/gh/aumarbello/Med-Manager.svg?style=svg)](https://circleci.com/gh/aumarbello/Med-Manager)

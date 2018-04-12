@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.User;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
+import com.khattabu.med_manager.presentation.list.MedicationList;
 
 import javax.inject.Inject;
 

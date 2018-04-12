@@ -1,29 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Ahmed, Umar Bello.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
 <resources>
     <string name="app_name">Med-Manager</string>
     <string name="app_info">App Info</string>
-    <string name="email_address">Email Address</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="date_added">Date Added</string>
-    <string name="interval">Interval</string>
-    <string name="period_active">Period Active:</string>
-    <string name="period_left">Period Left</string>
-    <string name="medication_range">Medication Range</string>
-    <string name="start_date">Start Date</string>
-    <string name="end_date">End Date</string>
-    <string name="personal_information">Personal Information</string>
-    <string name="first_name">First Name</string>
-    <string name="medication_info">Medication Information</string>
-    <string name="total_medications">Total Medications:</string>
-    <string name="highest_medication">Highest Medication (By Month)</string>
-    <string name="next_medication">Next Medication</string>
-    <string name="save_changes">Save Changes</string>
-    <string name="last_name">Last Name</string>
-    <string name="title">Title</string>
-    <string name="desc">Description</string>
-    <string name="value">Value</string>
-    <string name="add_medication">Add Medication</string>
-    <string name="edit_medication">Edit Medication</string>
-    <string name="delete_medication">Delete Medication</string>
-    <string name="select_date">Select Date</string>
+
+    <string name="login_email_address">Email Address</string>
+    <string name="login_password">Password</string>
+    <string name="action_login">Login</string>
+
+    <string name="item_date_added">Date Added</string>
+    <string name="title_interval">Interval</string>
+
+    <string name="details_period_active">Period Active:</string>
+    <string name="details_period_left">Period Left</string>
+
+    <string name="add_medication_range">Medication Range</string>
+    <string name="add_start_date">Start Date</string>
+    <string name="add_end_date">End Date</string>
+    <string name="profile_personal_information">Personal Information</string>
+    <string name="profile_first_name">First Name</string>
+    <string name="profile_medication_info">Medication Information</string>
+    <string name="profile_total_medications">Total Medications:</string>
+    <string name="profile_highest_medication">Highest Medication (By Month)</string>
+    <string name="profile_next_medication">Next Medication</string>
+    <string name="profile_save_changes">Save Changes</string>
+    <string name="profile_last_name">Last Name</string>
+    <string name="item_title">Title</string>
+    <string name="item_desc">Description</string>
+    <string name="add_value">Value</string>
+    <string name="title_add_medication">Add Medication</string>
+    <string name="action_edit_medication">Edit Medication</string>
+    <string name="action_delete_medication">Delete Medication</string>
+    <string name="title_select_date">Select Date</string>
 </resources>

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2018 Ahmed, Umar Bello.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.khattabu.med_manager.presentation.list;
 
 import android.content.Intent;
@@ -24,17 +40,16 @@ import butterknife.OnClick;
 
 public class MedicationList extends BaseActivity
         implements MedicationCallBack{
-    @Inject
-    ListRepository repository;
 
-    @BindView(R.id.medication_list)
-    RecyclerView medicationList;
+    @Inject ListRepository repository;
+
+    @BindView(R.id.recycler_view_medication) RecyclerView medicationList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.list_activity);
+        setContentView(R.layout.activity_medication_list);
         ButterKnife.bind(this);
         MedicationAdapter adapter = new MedicationAdapter(
                 repository.getAllMedication(), this);
@@ -44,11 +59,10 @@ public class MedicationList extends BaseActivity
 
     @Override
     public void openDetailedMedication(Medication medication) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA, medication);
+        startNextActivity(DetailActivity.getStartIntent(this, medication));
     }
 
-    @OnClick(R.id.add_medication)
+    @OnClick(R.id.fab_add_medication)
     public void addMedication(){
         Intent intent = new Intent(this, AddMedicationActivity.class);
         startNextActivity(intent);

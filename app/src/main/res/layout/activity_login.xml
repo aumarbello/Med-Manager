@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Ahmed, Umar Bello.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_splash"
+    android:background="@drawable/bg_splash"
     android:alpha="0.75"
     android:orientation="vertical">
 
@@ -21,8 +38,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/email_address"
-        android:hint="@string/email_address"
+        android:id="@+id/edit_email_address"
+        android:hint="@string/login_email_address"
         android:textSize="23sp"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -37,8 +54,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:hint="@string/password"
+        android:id="@+id/edit_password"
+        android:hint="@string/login_password"
         android:textSize="23sp"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -53,10 +70,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/login"
+        android:id="@+id/button_login"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/side_margin_normal"
-        android:text="@string/login"
+        android:text="@string/action_login"
         android:textSize="20sp"
         android:paddingStart="@dimen/large_margin"
         android:paddingEnd="@dimen/large_margin"
@@ -64,7 +81,7 @@
         />
 
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_login"
+        android:id="@+id/button_google_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

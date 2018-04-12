@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Ahmed, Umar Bello.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,10 +37,10 @@
             android:textColorHint="@color/gray">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/title"
+                android:id="@+id/edit_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/title"
+                android:hint="@string/item_title"
                 android:inputType="text"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -40,10 +57,10 @@
             android:textColorHint="@color/gray">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/desc"
+                android:id="@+id/edit_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/desc"
+                android:hint="@string/item_desc"
                 android:inputType="text"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -53,10 +70,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/select_date"
+            android:id="@+id/text_select_date"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:text="@string/select_date"
+            android:text="@string/title_select_date"
             android:layout_margin="@dimen/side_margin_normal"
             android:drawableStart="@drawable/ic_date_range_black_24dp"
             android:drawablePadding="@dimen/side_margin_small"
@@ -75,7 +92,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/start_date"
+                android:id="@+id/text_start_date"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/side_margin_small"
@@ -86,7 +103,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/end_date"
+                android:id="@+id/text_end_date"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/side_margin_small"
@@ -99,7 +116,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:text="@string/interval"
+            android:text="@string/title_interval"
             android:layout_marginStart="@dimen/side_margin_normal"
             android:layout_marginTop="@dimen/side_margin_large"
             />
@@ -116,7 +133,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/value"
+                android:hint="@string/add_value"
+                android:id="@+id/edit_value"
                 />
 
             <Spinner
@@ -124,6 +142,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/side_margin_small"
+                android:id="@+id/spinner_interval"
                 android:entries="@array/interval"
                 />
         </LinearLayout>
@@ -132,8 +151,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_medication"
-        android:text="@string/add_medication"
+        android:id="@+id/fab_add_medication"
+        android:text="@string/title_add_medication"
         android:textAllCaps="false"
         android:layout_marginStart="@dimen/side_margin_small"
         android:layout_marginEnd="@dimen/side_margin_small"

@@ -1,5 +1,22 @@
+/*
+ * Copyright 2018 Ahmed, Umar Bello.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.khattabu.med_manager.presentation.detail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +27,7 @@ import android.widget.TextView;
 
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
+import com.khattabu.med_manager.presentation.add.AddMedicationActivity;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.utils.DateUtils;
 
@@ -25,56 +43,55 @@ import butterknife.ButterKnife;
  */
 
 public class DetailActivity extends BaseActivity {
-    @Inject
-    DetailRepository repository;
+    @Inject DetailRepository repository;
 
-    @BindView(R.id.medication_desc)
-    TextView medicationDesc;
+    @BindView(R.id.text_medication_desc) TextView medicationDesc;
 
-    @BindView(R.id.period_active)
-    TextView periodActive;
+    @BindView(R.id.text_period_active) TextView periodActive;
 
-    @BindView(R.id.period_left)
-    TextView periodLeft;
+    @BindView(R.id.text_period_left) TextView periodLeft;
 
-    @BindView(R.id.start_date)
-    TextView startDate;
+    @BindView(R.id.text_start_date) TextView startDate;
 
-    @BindView(R.id.end_date)
-    TextView endDate;
+    @BindView(R.id.text_end_date) TextView endDate;
 
-    @BindView(R.id.interval)
-    TextView interval;
+    @BindView(R.id.text_interval) TextView interval;
 
-    public static final String EXTRA = "medication_extra";
+    public static final String EXTRA_MEDICATION = "com.khattabu.med_manager.EXTRA_MEDICATION";
     private Medication medication;
+
+    public static Intent getStartIntent(Context context, Medication medication){
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(EXTRA_MEDICATION, medication);
+        return intent;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.medication_detail);
+        setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(EXTRA)){
-            setUpView((Medication)intent.getSerializableExtra(EXTRA));
+        if (intent != null && intent.hasExtra(EXTRA_MEDICATION)){
+            setUpView((Medication)intent.getSerializableExtra(EXTRA_MEDICATION));
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.detail_menu, menu);
+        inflater.inflate(R.menu.activity_details, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.edit_medication:
+            case R.id.menu_edit_medication:
                 editMedication();
                 return true;
-            case R.id.delete_medication:
+            case R.id.menu_delete_medication:
                 repository.deletedRepository(medication);
                 onBackPressed();
                 return true;
@@ -86,7 +103,7 @@ public class DetailActivity extends BaseActivity {
         this.medication = medication;
         setAppTitle(medication.getTitle());
 
-        medicationDesc.setText(medication.getDesc());
+        medicationDesc.setText(medication.getDescription());
 
         startDate.setText(DateUtils.dateLongToString(medication.getStartDate()));
         endDate.setText(DateUtils.dateLongToString(medication.getEndDate()));
@@ -101,6 +118,7 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void editMedication(){
-
+        startNextActivity(AddMedicationActivity
+                .getStartIntent(this, medication));
     }
 }

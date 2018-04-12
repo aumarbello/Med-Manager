@@ -1,6 +1,6 @@
 package com.khattabu.med_manager.presentation.login;
 
-import com.khattabu.med_manager.data.local.pref.MedicationPref;
+import com.khattabu.med_manager.data.local.pref.MedicationPreference;
 import com.khattabu.med_manager.data.model.User;
 
 import javax.inject.Inject;
@@ -11,14 +11,14 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class LoginRepository {
-    private final MedicationPref pref;
+    private final MedicationPreference PREF;
 
     @Inject
-    public LoginRepository(MedicationPref pref) {
-        this.pref = pref;
+    public LoginRepository(MedicationPreference PREF) {
+        this.PREF = PREF;
     }
 
     void saveUser(User user){
-        pref.setUser(user);
+        PREF.setUser(user);
     }
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2018 Ahmed, Umar Bello.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.khattabu.med_manager.presentation.profile;
 
 import android.os.Bundle;
@@ -20,39 +36,32 @@ import butterknife.OnClick;
  */
 
 public class ProfileActivity extends BaseActivity {
-    @Inject
-    ProfileRepository repository;
+    @Inject ProfileRepository repository;
 
-    @BindView(R.id.first_name)
-    TextInputEditText firstName;
+    @BindView(R.id.edit_first_name) TextInputEditText firstName;
 
-    @BindView(R.id.last_name)
-    TextInputEditText lastName;
+    @BindView(R.id.edit_last_name) TextInputEditText lastName;
 
-    @BindView(R.id.user_email)
-    TextInputEditText emailAddress;
+    @BindView(R.id.edit_email) TextInputEditText emailAddress;
 
-    @BindView(R.id.total_medications)
-    TextView totalMedications;
+    @BindView(R.id.text_total_medications) TextView totalMedications;
 
-    @BindView(R.id.highest_medication)
-    TextView highestMedication;
+    @BindView(R.id.text_highest_medication) TextView highestMedication;
 
-    @BindView(R.id.next_medications)
-    TextView nextMedication;
+    @BindView(R.id.text_next_medications) TextView nextMedication;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.profile_activity);
+        setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
 
         setUp();
     }
 
-    @OnClick(R.id.save_changes)
+    @OnClick(R.id.button_save_changes)
     public void saveChanges(){
 
     }

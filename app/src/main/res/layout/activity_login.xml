@@ -41,13 +41,14 @@
         android:id="@+id/edit_email_address"
         android:hint="@string/login_email_address"
         android:textSize="23sp"
-        android:textAlignment="center"
         android:textColor="@color/black"
         android:inputType="textEmailAddress"
         android:background="@drawable/btn_curved_white"
         android:layout_marginTop="@dimen/side_margin_large"
         android:layout_marginStart="@dimen/side_margin_normal"
         android:layout_marginEnd="@dimen/side_margin_normal"
+        android:paddingStart="@dimen/side_margin_normal"
+        android:paddingEnd="@dimen/side_margin_normal"
         android:minHeight="@dimen/large_margin"
         />
 
@@ -57,13 +58,14 @@
         android:id="@+id/edit_password"
         android:hint="@string/login_password"
         android:textSize="23sp"
-        android:textAlignment="center"
         android:textColor="@color/black"
         android:inputType="textPassword"
         android:background="@drawable/btn_curved_white"
         android:layout_marginTop="@dimen/side_margin_large"
         android:layout_marginStart="@dimen/side_margin_normal"
         android:layout_marginEnd="@dimen/side_margin_normal"
+        android:paddingStart="@dimen/side_margin_normal"
+        android:paddingEnd="@dimen/side_margin_normal"
         android:minHeight="@dimen/large_margin"
         />
 

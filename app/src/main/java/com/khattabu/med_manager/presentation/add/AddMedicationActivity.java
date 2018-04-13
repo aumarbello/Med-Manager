@@ -61,6 +61,7 @@ public class AddMedicationActivity extends BaseActivity {
 
         setContentView(R.layout.activity_add_medication);
         ButterKnife.bind(this);
+        getAppComponent().inject(this);
     }
 
     @OnClick(R.id.text_select_date)

@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.khattabu.med_manager.di;
+package com.khattabu.med_manager.di.modules;
 
 import android.app.Application;
 import android.content.Context;
-
-import com.khattabu.med_manager.data.local.db.MedicationDAO;
-import com.khattabu.med_manager.data.local.db.MedicationDatabase;
 
 import javax.inject.Singleton;
 
@@ -41,12 +38,5 @@ public class AppModule {
     @Singleton
     Context providesApplicationContext(){
         return application;
-    }
-
-    @Provides
-    @Singleton
-    MedicationDAO providesMedicationDAO(){
-        return MedicationDatabase.getDatabase(application)
-                .medicationDAO();
     }
 }

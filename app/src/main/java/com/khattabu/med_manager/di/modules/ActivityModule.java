@@ -14,37 +14,24 @@
  * limitations under the License.
  */
 
-package com.khattabu.med_manager.presentation.profile;
+package com.khattabu.med_manager.di.modules;
+
+import android.content.Context;
 
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
-import com.khattabu.med_manager.data.local.pref.MedicationPreference;
-import com.khattabu.med_manager.data.model.User;
+import com.khattabu.med_manager.data.local.db.MedicationDatabase;
 
-import javax.inject.Inject;
+import dagger.Module;
+import dagger.Provides;
 
 /**
- * Created by ahmed on 4/10/18.
+ * Created by ahmed on 4/13/18.
  */
-
-public class ProfileRepository {
-    private final MedicationPreference PREF;
-    private final MedicationDAO DAO;
-
-    @Inject
-    ProfileRepository(MedicationPreference PREF, MedicationDAO DAO) {
-        this.PREF = PREF;
-        this.DAO = DAO;
-    }
-
-    User getUser(){
-        return PREF.getUser();
-    }
-
-    int getMedicationCount(){
-        return DAO.getMedicationCount();
-    }
-
-    void setUser(User user){
-        PREF.setUser(user);
+@Module
+public class ActivityModule {
+    @Provides
+    MedicationDAO providesMedicationDAO(Context context){
+        return MedicationDatabase.getDatabase(context)
+                .medicationDAO();
     }
 }

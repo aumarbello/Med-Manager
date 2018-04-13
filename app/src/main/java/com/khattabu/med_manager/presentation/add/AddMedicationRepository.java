@@ -20,13 +20,11 @@ import com.khattabu.med_manager.data.local.db.MedicationDAO;
 import com.khattabu.med_manager.data.model.Medication;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Created by ahmed on 4/10/18.
  */
 
-@Singleton
 public class AddMedicationRepository {
     private final MedicationDAO DAO;
 

@@ -18,6 +18,8 @@ package com.khattabu.med_manager.presentation.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -26,6 +28,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.khattabu.med_manager.R;
+import com.khattabu.med_manager.di.component.ActivityComponent;
+import com.khattabu.med_manager.di.component.DaggerActivityComponent;
+import com.khattabu.med_manager.di.modules.ActivityModule;
+import com.khattabu.med_manager.presentation.MedManager;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -34,6 +40,18 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+    private ActivityComponent component;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        component = DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule())
+                .appComponent(((MedManager)getApplication()).getComponent())
+                .build();
+    }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -97,5 +115,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    protected ActivityComponent getAppComponent(){
+        return component;
     }
 }

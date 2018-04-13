@@ -23,12 +23,11 @@ import android.preference.PreferenceManager;
 import com.khattabu.med_manager.data.model.User;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Created by ahmed on 4/10/18.
  */
-@Singleton
+
 public class MedicationPreference {
     private final SharedPreferences PREFERENCES;
 

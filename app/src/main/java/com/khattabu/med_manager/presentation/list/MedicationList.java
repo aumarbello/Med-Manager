@@ -51,6 +51,8 @@ public class MedicationList extends BaseActivity
 
         setContentView(R.layout.activity_medication_list);
         ButterKnife.bind(this);
+        getAppComponent().inject(this);
+
         MedicationAdapter adapter = new MedicationAdapter(
                 repository.getAllMedication(), this);
         medicationList.setAdapter(adapter);

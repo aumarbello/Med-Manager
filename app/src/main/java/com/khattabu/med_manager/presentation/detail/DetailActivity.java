@@ -72,6 +72,8 @@ public class DetailActivity extends BaseActivity {
 
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+        getAppComponent().inject(this);
+
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_MEDICATION)){
             setUpView((Medication)intent.getSerializableExtra(EXTRA_MEDICATION));

@@ -50,6 +50,7 @@ public class LoginActivity extends BaseActivity {
 
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        getAppComponent().inject(this);
     }
 
     @OnClick(R.id.button_login)
@@ -65,6 +66,7 @@ public class LoginActivity extends BaseActivity {
 
         User user = new User();
         user.setEmailAddress(emailAddress.getText().toString());
+
 
         repository.saveUser(user);
 

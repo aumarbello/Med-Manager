@@ -57,6 +57,7 @@ public class ProfileActivity extends BaseActivity {
 
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
+        getAppComponent().inject(this);
 
         setUp();
     }

@@ -14,28 +14,17 @@
  * limitations under the License.
  */
 
-package com.khattabu.med_manager.presentation.list;
+package com.khattabu.med_manager.di;
 
-import com.khattabu.med_manager.data.local.db.MedicationDAO;
-import com.khattabu.med_manager.data.model.Medication;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-import java.util.List;
-
-import javax.inject.Inject;
+import javax.inject.Scope;
 
 /**
- * Created by ahmed on 4/10/18.
+ * Created by ahmed on 3/29/18.
  */
-
-public class ListRepository {
-    private final MedicationDAO DAO;
-
-    @Inject
-    public ListRepository(MedicationDAO DAO) {
-        this.DAO = DAO;
-    }
-
-    List<Medication> getAllMedication(){
-        return DAO.getAllMedications().getValue();
-    }
+@Scope
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PerActivity {
 }

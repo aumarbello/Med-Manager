@@ -19,6 +19,9 @@ package com.khattabu.med_manager.presentation;
 import android.app.Application;
 
 import com.khattabu.med_manager.R;
+import com.khattabu.med_manager.di.component.AppComponent;
+import com.khattabu.med_manager.di.component.DaggerAppComponent;
+import com.khattabu.med_manager.di.modules.AppModule;
 import com.khattabu.med_manager.utils.AppLogger;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -28,15 +31,29 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 
 public class MedManager extends Application {
+    private AppComponent component;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         AppLogger.init();
 
+        component = init(this);
+
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/Roboto-Thin.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
+    }
+
+    public AppComponent init(MedManager application){
+        return DaggerAppComponent.builder()
+                .appModule(new AppModule(application))
+                .build();
+    }
+
+    public AppComponent getComponent() {
+        return component;
     }
 }

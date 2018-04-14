@@ -16,11 +16,11 @@
 
 package com.khattabu.med_manager.presentation.base;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -34,6 +34,7 @@ import com.khattabu.med_manager.di.component.ActivityComponent;
 import com.khattabu.med_manager.di.component.DaggerActivityComponent;
 import com.khattabu.med_manager.di.modules.ActivityModule;
 import com.khattabu.med_manager.presentation.MedManager;
+import com.khattabu.med_manager.utils.AppLogger;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -119,7 +120,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void setAppTitle(String title){
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
             actionBar.setTitle(title);
         }
@@ -136,7 +137,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void shouldShowBackButton(){
-        android.app.ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }

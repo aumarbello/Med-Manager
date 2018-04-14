@@ -59,6 +59,8 @@ public class ProfileActivity extends BaseActivity {
         ButterKnife.bind(this);
         getAppComponent().inject(this);
 
+        shouldShowBackButton();
+        setAppTitle("User Profile");
         setUp();
     }
 

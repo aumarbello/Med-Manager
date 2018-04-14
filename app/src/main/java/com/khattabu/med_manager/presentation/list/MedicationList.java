@@ -57,6 +57,7 @@ public class MedicationList extends BaseActivity
                 repository.getAllMedication(), this);
         medicationList.setAdapter(adapter);
         medicationList.setLayoutManager(new LinearLayoutManager(this));
+        setAppTitle("Home");
     }
 
     @Override

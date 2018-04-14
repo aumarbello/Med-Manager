@@ -66,6 +66,8 @@ class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Medicatio
 
     @Override
     public int getItemCount() {
+        if (MEDICATION_LIST == null)
+            return 0;
         return MEDICATION_LIST.size();
     }
 

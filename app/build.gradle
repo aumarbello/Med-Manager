@@ -62,7 +62,7 @@ dependencies {
     implementation otherDep.caligraphy
     implementation otherDep.timber
     implementation otherDep.googleLogin
-    implementation otherDep.sectionCalenderView
+    implementation otherDep.spinnerDialog
 
     testImplementation testDep.jUnit
     testImplementation testDep.mockito

@@ -27,6 +27,14 @@ import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
+import com.tsongkha.spinnerdatepicker.DatePicker;
+import com.tsongkha.spinnerdatepicker.DatePickerDialog;
+import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -38,7 +46,9 @@ import butterknife.OnClick;
  * Created by ahmed on 4/10/18.
  */
 
-public class AddMedicationActivity extends BaseActivity {
+public class AddMedicationActivity extends BaseActivity
+        implements DatePickerDialog.OnDateSetListener {
+
     @Inject AddMedicationRepository repository;
 
     @BindView(R.id.edit_title) TextInputEditText title;
@@ -48,6 +58,9 @@ public class AddMedicationActivity extends BaseActivity {
     @BindView(R.id.text_start_date) TextView startDate;
 
     @BindView(R.id.text_end_date) TextView endDate;
+
+    private DatePickerDialog datePicker;
+    private TextView textView;
 
     public static Intent getStartIntent(Context context, Medication medication){
         Intent intent = new Intent(context, AddMedicationActivity.class);
@@ -64,13 +77,48 @@ public class AddMedicationActivity extends BaseActivity {
         getAppComponent().inject(this);
     }
 
-    @OnClick(R.id.text_select_date)
-    public void selectDate(){
+    @OnClick(R.id.text_start_date)
+    public void selectStartDate(){
+        showDateDialog(startDate);
+    }
+
+    @OnClick(R.id.text_end_date)
+    public void selectEndDate(){
+        showDateDialog(endDate);
+    }
+
+    @OnClick(R.id.button_add_medication)
+    public void addMedication(){
 
     }
 
-    @OnClick(R.id.fab_add_medication)
-    public void addMedication(){
+    private void showDateDialog(TextView textView) {
+        this.textView = textView;
+        if (datePicker != null && datePicker.isShowing())
+            return;
 
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+
+        datePicker = new SpinnerDatePickerDialogBuilder()
+                .context(this)
+                .callback(this)
+                .defaultDate(year, month, day)
+                .build();
+
+        datePicker.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
+                Locale.getDefault());
+        Calendar selectedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+
+        if (textView != null){
+            textView.setText(dateFormat.format(selectedDate.getTime()));
+        }
     }
 }

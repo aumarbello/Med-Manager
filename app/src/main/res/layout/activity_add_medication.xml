@@ -18,7 +18,6 @@
 
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -75,7 +74,6 @@
             android:textColor="@color/black"
             android:text="@string/title_select_date"
             android:layout_margin="@dimen/side_margin_normal"
-            android:drawableStart="@drawable/ic_date_range_black_24dp"
             android:drawablePadding="@dimen/side_margin_small"
             />
 
@@ -93,10 +91,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/text_start_date"
+                android:text="@string/add_start_date"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/side_margin_small"
-                tools:text="12/03/2017"
                 />
 
             <TextView
@@ -104,10 +102,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/text_end_date"
+                android:text="@string/add_end_date"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/side_margin_small"
-                tools:text="31/03/2017"
                 />
         </LinearLayout>
 
@@ -135,6 +133,8 @@
                 android:layout_weight="1"
                 android:hint="@string/add_value"
                 android:id="@+id/edit_value"
+                android:inputType="number"
+                android:maxLength="2"
                 />
 
             <Spinner
@@ -151,7 +151,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fab_add_medication"
+        android:id="@+id/button_add_medication"
         android:text="@string/title_add_medication"
         android:textAllCaps="false"
         android:layout_marginStart="@dimen/side_margin_small"

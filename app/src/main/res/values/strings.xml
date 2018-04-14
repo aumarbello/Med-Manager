@@ -48,4 +48,5 @@
     <string name="action_edit_medication">Edit Medication</string>
     <string name="action_delete_medication">Delete Medication</string>
     <string name="title_select_date">Select Date</string>
+    <string name="title_loading">Loading</string>
 </resources>

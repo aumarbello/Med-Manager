@@ -16,15 +16,17 @@
 
 package com.khattabu.med_manager.presentation.base;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.khattabu.med_manager.R;
@@ -41,6 +43,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private ActivityComponent component;
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +53,28 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .activityModule(new ActivityModule())
                 .appComponent(((MedManager)getApplication()).getComponent())
                 .build();
+    }
+
+    protected void showLoadingState(@Nullable String text){
+        View view = View.inflate(this, R.layout.dialog_progress, null);
+
+        if (text != null){
+            TextView title = view.findViewById(R.id.text_title);
+            title.setText(text);
+        }
+
+        progressDialog = new AlertDialog.Builder(this)
+                .setView(view)
+                .setCancelable(false)
+                .create();
+
+        progressDialog.show();
+    }
+
+    protected void hideLoadingState(){
+        if (progressDialog != null && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 
     @Override
@@ -94,7 +119,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void setAppTitle(String title){
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getActionBar();
         if (actionBar != null){
             actionBar.setTitle(title);
         }
@@ -111,7 +136,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void shouldShowBackButton(){
-        ActionBar actionBar = getSupportActionBar();
+        android.app.ActionBar actionBar = getActionBar();
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }

@@ -21,12 +21,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.add.AddMedicationActivity;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
+import com.khattabu.med_manager.presentation.profile.ProfileActivity;
 
 import javax.inject.Inject;
 
@@ -58,6 +61,22 @@ public class MedicationList extends BaseActivity
         medicationList.setAdapter(adapter);
         medicationList.setLayoutManager(new LinearLayoutManager(this));
         setAppTitle("Home");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_medication_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_open_profile){
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startNextActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

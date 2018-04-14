@@ -76,6 +76,6 @@ public class ProfileActivity extends BaseActivity {
         lastName.setText(user.getLastName());
         emailAddress.setText(user.getEmailAddress());
 
-        totalMedications.setText(repository.getMedicationCount());
+        totalMedications.setText(String.valueOf(repository.getMedicationCount()));
     }
 }

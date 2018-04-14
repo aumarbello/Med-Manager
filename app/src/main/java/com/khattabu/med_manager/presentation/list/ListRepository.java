@@ -36,6 +36,6 @@ public class ListRepository {
     }
 
     List<Medication> getAllMedication(){
-        return DAO.getAllMedications().getValue();
+        return DAO.getAllMedications();
     }
 }

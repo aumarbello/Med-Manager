@@ -16,7 +16,6 @@
 
 package com.khattabu.med_manager.data.local.db;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -43,11 +42,11 @@ public interface MedicationDAO {
     void deleteMedication(Medication medication);
 
     @Query("SELECT * FROM medication")
-    LiveData<List<Medication>> getAllMedications();
+    List<Medication> getAllMedications();
 
     @Query("SELECT * FROM medication WHERE title LIKE :searchQuery" +
             " OR month LIKE :searchQuery")
-    LiveData<List<Medication>> searchMedications(String searchQuery);
+    List<Medication> searchMedications(String searchQuery);
 
     @Query("SELECT COUNT (*) FROM medication")
     int getMedicationCount();

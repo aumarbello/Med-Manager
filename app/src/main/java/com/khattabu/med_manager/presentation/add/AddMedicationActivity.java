@@ -21,12 +21,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
+import com.khattabu.med_manager.utils.DateUtils;
 import com.tsongkha.spinnerdatepicker.DatePicker;
 import com.tsongkha.spinnerdatepicker.DatePickerDialog;
 import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
@@ -59,6 +62,10 @@ public class AddMedicationActivity extends BaseActivity
 
     @BindView(R.id.text_end_date) TextView endDate;
 
+    @BindView(R.id.edit_value) EditText intervalValue;
+
+    @BindView(R.id.spinner_interval) Spinner intervalSpinner;
+
     private DatePickerDialog datePicker;
     private TextView textView;
 
@@ -77,6 +84,17 @@ public class AddMedicationActivity extends BaseActivity
         getAppComponent().inject(this);
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
+                Locale.getDefault());
+        Calendar selectedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+
+        if (textView != null){
+            textView.setText(dateFormat.format(selectedDate.getTime()));
+        }
+    }
+
     @OnClick(R.id.text_start_date)
     public void selectStartDate(){
         showDateDialog(startDate);
@@ -89,7 +107,22 @@ public class AddMedicationActivity extends BaseActivity
 
     @OnClick(R.id.button_add_medication)
     public void addMedication(){
+        if (validateInput()){
+            String medicTitle = title.getText().toString();
+            String medicDesc = desc.getText().toString();
 
+            long startDateLong = DateUtils.dateStringToLong(startDate.getText().toString());
+            long endDateLong = DateUtils.dateStringToLong(endDate.getText().toString());
+
+            Medication medication = new Medication(
+                    medicTitle, DateUtils.getMonthString(startDateLong),
+                    medicDesc, Calendar.getInstance().getTimeInMillis(),
+                    startDateLong, endDateLong, Integer.valueOf(intervalValue.getText().toString()),
+                    intervalSpinner.getSelectedItem().toString()
+            );
+
+            repository.addMedication(medication);
+        }
     }
 
     private void showDateDialog(TextView textView) {
@@ -111,14 +144,32 @@ public class AddMedicationActivity extends BaseActivity
         datePicker.show();
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
-                Locale.getDefault());
-        Calendar selectedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-
-        if (textView != null){
-            textView.setText(dateFormat.format(selectedDate.getTime()));
+    private boolean validateInput(){
+        if (title.getText().toString().trim().isEmpty()){
+            showMessage("Medication title can't be empty.");
+            return false;
         }
+
+        if (desc.getText().toString().trim().isEmpty()){
+            showMessage("Medication Description can't be empty.");
+            return false;
+        }
+
+        if (startDate.getText().equals(getString(R.string.add_start_date))){
+            showMessage("Start Date not selected.");
+            return false;
+        }
+
+        if (endDate.getText().equals(getString(R.string.add_end_date))){
+            showMessage("End Date not selected.");
+            return false;
+        }
+
+        if (intervalValue.getText().toString().isEmpty()){
+            showMessage("Medication interval not inputted");
+            return false;
+        }
+
+        return true;
     }
 }

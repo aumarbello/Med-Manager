@@ -16,6 +16,7 @@
 
 package com.khattabu.med_manager.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -66,5 +67,25 @@ public final class DateUtils {
     private static String getComparedDate(int diff, String factor){
         String format = "%d %s";
         return String.format(Locale.getDefault(), format, diff, factor);
+    }
+
+    public static long dateStringToLong(String text) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
+                Locale.getDefault());
+
+        try {
+            return dateFormat.parse(text).getTime();
+        }catch (ParseException ex){
+            return Calendar.getInstance().getTimeInMillis();
+        }
+    }
+
+    public static String getMonthString(long startDateLong) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(startDateLong);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMMMMMMM",
+                Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
     }
 }

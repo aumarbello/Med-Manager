@@ -16,6 +16,8 @@
 
 package com.khattabu.med_manager.presentation.add;
 
+import android.os.AsyncTask;
+
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
 import com.khattabu.med_manager.data.model.Medication;
 
@@ -26,11 +28,11 @@ import javax.inject.Inject;
  */
 
 public class AddMedicationRepository {
-    private final MedicationDAO DAO;
+    private static MedicationDAO DAO;
 
     @Inject
-    public  AddMedicationRepository(MedicationDAO DAO){
-        this.DAO = DAO;
+    public  AddMedicationRepository(MedicationDAO medicationDAO){
+        DAO = medicationDAO;
     }
 
     void addMedication(Medication medication){
@@ -39,6 +41,13 @@ public class AddMedicationRepository {
 
     void updateMedication(Medication medication){
         DAO.updateMedication(medication);
+    }
 
+    private static class AddTask extends AsyncTask<Medication, Void, Void>{
+        @Override
+        protected Void doInBackground(Medication... medications) {
+            DAO.insertMedication(medications[0]);
+            return null;
+        }
     }
 }

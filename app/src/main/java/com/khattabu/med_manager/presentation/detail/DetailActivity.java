@@ -59,6 +59,7 @@ public class DetailActivity extends BaseActivity implements DetailViewContract{
 
     public static final String EXTRA_MEDICATION = "com.khattabu.med_manager.EXTRA_MEDICATION";
     private Medication medication;
+    private static int EDIT_MEDICATION = 121;
 
     public static Intent getStartIntent(Context context, Medication medication){
         Intent intent = new Intent(context, DetailActivity.class);
@@ -109,6 +110,17 @@ public class DetailActivity extends BaseActivity implements DetailViewContract{
         onBackPressed();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDIT_MEDICATION && resultCode == RESULT_OK){
+            Medication medication = (Medication) data.getSerializableExtra(EXTRA_MEDICATION);
+            this.medication = medication;
+            setUpView(medication);
+        }
+    }
+
     private void setUpView(Medication medication) {
         this.medication = medication;
         setAppTitle(medication.getTitle());
@@ -128,7 +140,7 @@ public class DetailActivity extends BaseActivity implements DetailViewContract{
     }
 
     private void editMedication(){
-        startNextActivity(AddMedicationActivity
-                .getStartIntent(this, medication));
+        startNextActivityForResult(AddMedicationActivity
+                .getStartIntent(this, medication), EDIT_MEDICATION);
     }
 }

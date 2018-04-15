@@ -118,8 +118,12 @@ public class AddMedicationActivity extends BaseActivity
     }
 
     @Override
-    public void onMedicationUpdated() {
-        backToList();
+    public void onMedicationUpdated(Medication medication) {
+        Intent intent = getIntent();
+        intent.putExtra(EXTRA_MEDICATION, medication);
+        setResult(RESULT_OK, intent);
+        overridePendingTransition(R.anim.left_in, android.R.anim.fade_out);
+        finish();
     }
 
     @OnClick(R.id.text_start_date)

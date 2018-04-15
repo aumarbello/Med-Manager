@@ -1,5 +1,6 @@
 package com.khattabu.med_manager.presentation.add;
 
+import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.base.BaseViewContract;
 
 /**
@@ -8,5 +9,5 @@ import com.khattabu.med_manager.presentation.base.BaseViewContract;
 
 public interface AddMedicationViewContract extends BaseViewContract {
     void onMedicationAdded();
-    void onMedicationUpdated();
+    void onMedicationUpdated(Medication medication);
 }

@@ -61,7 +61,7 @@ public class AddMedicationRepository {
         Disposable disposable = Single.fromCallable(() -> DAO.updateMedication(medication))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(aVoid -> viewContract.onMedicationUpdated(),
+                .subscribe(aVoid -> viewContract.onMedicationUpdated(medication),
                         throwable -> {
                             viewContract.onError(null);
                             AppLogger.e("Failed to update Medication", throwable);

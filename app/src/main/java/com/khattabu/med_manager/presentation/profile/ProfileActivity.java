@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * Created by ahmed on 4/10/18.
  */
 
-public class ProfileActivity extends BaseActivity {
+public class ProfileActivity extends BaseActivity implements ProfileViewContract{
     @Inject ProfileRepository repository;
 
     @BindView(R.id.edit_first_name) TextInputEditText firstName;
@@ -58,10 +58,16 @@ public class ProfileActivity extends BaseActivity {
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
         getAppComponent().inject(this);
+        repository.onAttach(this);
 
         shouldShowBackButton();
         setAppTitle("User Profile");
         setUp();
+    }
+
+    @Override
+    public void setMedicationCount(int count) {
+        totalMedications.setText(String.valueOf(count));
     }
 
     @OnClick(R.id.button_save_changes)
@@ -85,6 +91,6 @@ public class ProfileActivity extends BaseActivity {
         lastName.setText(user.getLastName());
         emailAddress.setText(user.getEmailAddress());
 
-        totalMedications.setText(String.valueOf(repository.getMedicationCount()));
+        repository.getMedicationCount();
     }
 }

@@ -18,21 +18,43 @@ package com.khattabu.med_manager.presentation.detail;
 
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
 import com.khattabu.med_manager.data.model.Medication;
+import com.khattabu.med_manager.utils.AppLogger;
+
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by ahmed on 4/10/18.
  */
 public class DetailRepository{
     private final MedicationDAO DAO;
+    private DetailViewContract viewContract;
 
     @Inject
     public DetailRepository(MedicationDAO DAO) {
         this.DAO = DAO;
     }
 
+    void onAttach(DetailViewContract  viewContract){
+        this.viewContract = viewContract;
+    }
+
     void deletedRepository(Medication medication){
-        DAO.deleteMedication(medication);
+        Disposable disposable = Single.fromCallable(() -> DAO.deleteMedication(medication))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(integer -> viewContract.onMedicationDeleted(),
+                        throwable -> {
+                            viewContract.onError("Medication not deleted, try again later.");
+                            AppLogger.e(throwable);
+                        });
+
+        viewContract.addDisposable(disposable);
     }
 }

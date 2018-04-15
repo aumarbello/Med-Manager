@@ -50,7 +50,7 @@ import butterknife.OnClick;
  */
 
 public class AddMedicationActivity extends BaseActivity
-        implements DatePickerDialog.OnDateSetListener {
+        implements DatePickerDialog.OnDateSetListener, AddMedicationViewContract{
 
     @Inject AddMedicationRepository repository;
 
@@ -82,6 +82,7 @@ public class AddMedicationActivity extends BaseActivity
         setContentView(R.layout.activity_add_medication);
         ButterKnife.bind(this);
         getAppComponent().inject(this);
+        repository.onAttach(this);
 
         shouldShowBackButton();
         setAppTitle("Add Medication");
@@ -96,6 +97,16 @@ public class AddMedicationActivity extends BaseActivity
         if (textView != null){
             textView.setText(dateFormat.format(selectedDate.getTime()));
         }
+    }
+
+    @Override
+    public void onMedicationAdded() {
+        backToList();
+    }
+
+    @Override
+    public void onMedicationUpdated() {
+        backToList();
     }
 
     @OnClick(R.id.text_start_date)
@@ -124,6 +135,7 @@ public class AddMedicationActivity extends BaseActivity
                     intervalSpinner.getSelectedItem().toString()
             );
 
+            showLoadingState("Adding");
             repository.addMedication(medication);
         }
     }
@@ -174,5 +186,10 @@ public class AddMedicationActivity extends BaseActivity
         }
 
         return true;
+    }
+
+    private void backToList(){
+        hideLoadingState();
+        onBackPressed();
     }
 }

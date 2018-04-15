@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,17 +35,19 @@ import com.khattabu.med_manager.di.component.ActivityComponent;
 import com.khattabu.med_manager.di.component.DaggerActivityComponent;
 import com.khattabu.med_manager.di.modules.ActivityModule;
 import com.khattabu.med_manager.presentation.MedManager;
-import com.khattabu.med_manager.utils.AppLogger;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by ahmed on 4/8/18.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BaseViewContract{
     private ActivityComponent component;
     private AlertDialog progressDialog;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +57,49 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .activityModule(new ActivityModule())
                 .appComponent(((MedManager)getApplication()).getComponent())
                 .build();
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.dispose();
+
+        super.onDestroy();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.right_out, android.R.anim.fade_out);
+    }
+
+    @Override
+    public void addDisposable(Disposable disposable) {
+        compositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void onError(@Nullable String msg) {
+        msg = msg == null ? "An error occurred please try again"
+                : msg;
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+                msg, Snackbar.LENGTH_SHORT);
+
+        hideLoadingState();
+        snackbar.show();
     }
 
     protected void showLoadingState(@Nullable String text){
@@ -76,26 +122,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (progressDialog != null && progressDialog.isShowing()){
             progressDialog.dismiss();
         }
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
-            onBackPressed();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.right_out, android.R.anim.fade_out);
     }
 
     protected void hideKeyboard() {

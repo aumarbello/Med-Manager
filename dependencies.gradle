@@ -31,6 +31,7 @@ ext {
     roomVersion = '1.1.0-beta2'
     pagingVersion = '1.0.0-beta1'
     pagingRxVersion = '1.0.0-alpha1'
+    rxAndroidVersion = '2.0.1'
 
     //Test versions
     jUnitVersion = '4.12'
@@ -64,6 +65,7 @@ ext {
             java8Lifecycle : "android.arch.lifecycle:common-java8:${archExtensionVersion}",
             room : "android.arch.persistence.room:runtime:${roomVersion}",
             roomRxJava : "android.arch.persistence.room:rxjava2:${roomVersion}",
+            rxAndroid    : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             roomProcessor : "android.arch.persistence.room:compiler:${roomVersion}",
             paging : "android.arch.paging:runtime:${pagingVersion}",
             pagingRx : "android.arch.paging:rxjava2:${pagingRxVersion}"

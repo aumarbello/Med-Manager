@@ -35,7 +35,6 @@ public abstract class MedicationDatabase extends RoomDatabase {
         if (INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                     MedicationDatabase.class, "medication-database")
-                    .allowMainThreadQueries()
                     .build();
         }
 

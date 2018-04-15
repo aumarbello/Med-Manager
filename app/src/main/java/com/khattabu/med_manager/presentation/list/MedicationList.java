@@ -26,10 +26,14 @@ import android.view.MenuItem;
 
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
+import com.khattabu.med_manager.data.model.MedicationStatus;
 import com.khattabu.med_manager.presentation.add.AddMedicationActivity;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
 import com.khattabu.med_manager.presentation.profile.ProfileActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -42,11 +46,13 @@ import butterknife.OnClick;
  */
 
 public class MedicationList extends BaseActivity
-        implements MedicationCallBack{
+        implements MedicationCallBack, ListViewContract{
 
     @Inject ListRepository repository;
 
     @BindView(R.id.recycler_view_medication) RecyclerView medicationList;
+
+    private MedicationAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,9 +61,11 @@ public class MedicationList extends BaseActivity
         setContentView(R.layout.activity_medication_list);
         ButterKnife.bind(this);
         getAppComponent().inject(this);
+        repository.onAttach(this);
+        repository.getAllMedication();
 
-        MedicationAdapter adapter = new MedicationAdapter(
-                repository.getAllMedication(), this);
+        adapter = new MedicationAdapter(
+                new ArrayList<>(), this);
         medicationList.setAdapter(adapter);
         medicationList.setLayoutManager(new LinearLayoutManager(this));
         setAppTitle("Home");
@@ -82,6 +90,16 @@ public class MedicationList extends BaseActivity
     @Override
     public void openDetailedMedication(Medication medication) {
         startNextActivity(DetailActivity.getStartIntent(this, medication));
+    }
+
+    @Override
+    public void setMedicationList(List<Medication> medicationList) {
+        adapter.setList(medicationList);
+    }
+
+    @Override
+    public void onMedicationChanged(Medication medication, MedicationStatus status) {
+
     }
 
     @OnClick(R.id.fab_add_medication)

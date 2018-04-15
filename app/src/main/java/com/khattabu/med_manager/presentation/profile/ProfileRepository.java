@@ -19,8 +19,14 @@ package com.khattabu.med_manager.presentation.profile;
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
 import com.khattabu.med_manager.data.local.pref.MedicationPreference;
 import com.khattabu.med_manager.data.model.User;
+import com.khattabu.med_manager.utils.AppLogger;
 
 import javax.inject.Inject;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by ahmed on 4/10/18.
@@ -29,6 +35,7 @@ import javax.inject.Inject;
 public class ProfileRepository {
     private final MedicationPreference PREF;
     private final MedicationDAO DAO;
+    private ProfileViewContract viewContract;
 
     @Inject
     ProfileRepository(MedicationPreference PREF, MedicationDAO DAO) {
@@ -36,12 +43,25 @@ public class ProfileRepository {
         this.DAO = DAO;
     }
 
+    void onAttach(ProfileViewContract viewContract){
+        this.viewContract = viewContract;
+    }
+
     User getUser(){
         return PREF.getUser();
     }
 
-    int getMedicationCount(){
-        return DAO.getMedicationCount();
+    void getMedicationCount(){
+        Disposable disposable = Single.fromCallable(DAO::getMedicationCount)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(integer -> viewContract.setMedicationCount(integer),
+                        throwable -> {
+                            viewContract.onError(null);
+                            AppLogger.e(throwable);
+                        });
+
+        viewContract.addDisposable(disposable);
     }
 
     void setUser(User user){

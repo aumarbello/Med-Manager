@@ -17,11 +17,15 @@
 package com.khattabu.med_manager.presentation.list;
 
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
-import com.khattabu.med_manager.data.model.Medication;
+import com.khattabu.med_manager.utils.AppLogger;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by ahmed on 4/10/18.
@@ -29,13 +33,30 @@ import javax.inject.Inject;
 
 public class ListRepository {
     private final MedicationDAO DAO;
+    private ListViewContract viewContract;
 
     @Inject
     public ListRepository(MedicationDAO DAO) {
         this.DAO = DAO;
     }
 
-    List<Medication> getAllMedication(){
-        return DAO.getAllMedications();
+    void onAttach(ListViewContract viewContract){
+        this.viewContract = viewContract;
+    }
+
+    void getAllMedication(){
+        Disposable disposable = DAO.getAllMedications()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(medications -> {
+                    if (medications == null)
+                        medications = new ArrayList<>();
+                    viewContract.setMedicationList(medications);
+                }, throwable -> {
+                    viewContract.onError(null);
+                    AppLogger.e(throwable);
+                });
+
+        viewContract.addDisposable(disposable);
     }
 }

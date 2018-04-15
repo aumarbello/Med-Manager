@@ -57,6 +57,7 @@ dependencies {
     annotationProcessor archComponentsDep.roomProcessor
     implementation archComponentsDep.paging
     implementation archComponentsDep.pagingRx
+    implementation archComponentsDep.rxAndroid
 
     implementation otherDep.constraintLayout
     implementation otherDep.caligraphy

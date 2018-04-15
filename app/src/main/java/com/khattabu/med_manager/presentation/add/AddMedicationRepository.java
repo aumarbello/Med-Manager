@@ -16,38 +16,44 @@
 
 package com.khattabu.med_manager.presentation.add;
 
-import android.os.AsyncTask;
-
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
 import com.khattabu.med_manager.data.model.Medication;
+import com.khattabu.med_manager.utils.AppLogger;
 
 import javax.inject.Inject;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by ahmed on 4/10/18.
  */
 
 public class AddMedicationRepository {
-    private static MedicationDAO DAO;
+    private final MedicationDAO DAO;
+    private AddMedicationViewContract viewContract;
 
     @Inject
     public  AddMedicationRepository(MedicationDAO medicationDAO){
         DAO = medicationDAO;
     }
 
+    void onAttach(AddMedicationViewContract viewContract){
+        this.viewContract = viewContract;
+    }
+
     void addMedication(Medication medication){
-        DAO.insertMedication(medication);
-    }
+        Disposable disposable = Single.fromCallable(() -> DAO.insertOrUpdateMedication(medication))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(aVoid -> viewContract.onMedicationAdded(),
+                        throwable -> {
+                            viewContract.onError(null);
+                            AppLogger.e("Failed to add Medication", throwable);
+                        });
 
-    void updateMedication(Medication medication){
-        DAO.updateMedication(medication);
-    }
-
-    private static class AddTask extends AsyncTask<Medication, Void, Void>{
-        @Override
-        protected Void doInBackground(Medication... medications) {
-            DAO.insertMedication(medications[0]);
-            return null;
-        }
+        viewContract.addDisposable(disposable);
     }
 }

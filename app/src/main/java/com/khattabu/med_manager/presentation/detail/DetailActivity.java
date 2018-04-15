@@ -42,7 +42,7 @@ import butterknife.ButterKnife;
  * Created by ahmed on 4/10/18.
  */
 
-public class DetailActivity extends BaseActivity {
+public class DetailActivity extends BaseActivity implements DetailViewContract{
     @Inject DetailRepository repository;
 
     @BindView(R.id.text_medication_desc) TextView medicationDesc;
@@ -73,6 +73,7 @@ public class DetailActivity extends BaseActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         getAppComponent().inject(this);
+        repository.onAttach(this);
 
         shouldShowBackButton();
 
@@ -101,6 +102,11 @@ public class DetailActivity extends BaseActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMedicationDeleted() {
+        onBackPressed();
     }
 
     private void setUpView(Medication medication) {

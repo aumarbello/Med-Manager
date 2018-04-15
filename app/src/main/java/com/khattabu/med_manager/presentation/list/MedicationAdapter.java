@@ -71,6 +71,12 @@ class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Medicatio
         return MEDICATION_LIST.size();
     }
 
+    public void setList(List<Medication> medicationList) {
+        MEDICATION_LIST.clear();
+        MEDICATION_LIST.addAll(medicationList);
+        notifyDataSetChanged();
+    }
+
     class MedicationHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.text_medication_title) TextView medicationTitle;
 

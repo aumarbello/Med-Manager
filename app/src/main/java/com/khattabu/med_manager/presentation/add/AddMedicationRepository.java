@@ -45,13 +45,26 @@ public class AddMedicationRepository {
     }
 
     void addMedication(Medication medication){
-        Disposable disposable = Single.fromCallable(() -> DAO.insertOrUpdateMedication(medication))
+        Disposable disposable = Single.fromCallable(() -> DAO.insertMedication(medication))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(aVoid -> viewContract.onMedicationAdded(),
                         throwable -> {
                             viewContract.onError(null);
                             AppLogger.e("Failed to add Medication", throwable);
+                        });
+
+        viewContract.addDisposable(disposable);
+    }
+
+    void updateMedication(Medication medication){
+        Disposable disposable = Single.fromCallable(() -> DAO.updateMedication(medication))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(aVoid -> viewContract.onMedicationUpdated(),
+                        throwable -> {
+                            viewContract.onError(null);
+                            AppLogger.e("Failed to update Medication", throwable);
                         });
 
         viewContract.addDisposable(disposable);

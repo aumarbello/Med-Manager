@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,7 +29,6 @@ import android.widget.TextView;
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
-import com.khattabu.med_manager.presentation.detail.DetailActivity;
 import com.khattabu.med_manager.utils.DateUtils;
 import com.tsongkha.spinnerdatepicker.DatePicker;
 import com.tsongkha.spinnerdatepicker.DatePickerDialog;
@@ -44,6 +44,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.khattabu.med_manager.presentation.detail.DetailActivity.EXTRA_MEDICATION;
 
 /**
  * Created by ahmed on 4/10/18.
@@ -66,12 +68,16 @@ public class AddMedicationActivity extends BaseActivity
 
     @BindView(R.id.spinner_interval) Spinner intervalSpinner;
 
+    @BindView(R.id.button_add_medication) Button addMedication;
+
     private DatePickerDialog datePicker;
     private TextView textView;
+    private boolean isUpdate;
+    private Medication oldMedication;
 
     public static Intent getStartIntent(Context context, Medication medication){
         Intent intent = new Intent(context, AddMedicationActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_MEDICATION, medication);
+        intent.putExtra(EXTRA_MEDICATION, medication);
         return intent;
     }
 
@@ -86,16 +92,23 @@ public class AddMedicationActivity extends BaseActivity
 
         shouldShowBackButton();
         setAppTitle("Add Medication");
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(EXTRA_MEDICATION)){
+            isUpdate = true;
+            addMedication.setText(R.string.action_update_medication);
+
+            Medication medication = (Medication) intent.getSerializableExtra(EXTRA_MEDICATION);
+            setUpEdit(medication);
+        }
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
-                Locale.getDefault());
         Calendar selectedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 
         if (textView != null){
-            textView.setText(dateFormat.format(selectedDate.getTime()));
+            textView.setText(getDateString(selectedDate));
         }
     }
 
@@ -122,21 +135,33 @@ public class AddMedicationActivity extends BaseActivity
     @OnClick(R.id.button_add_medication)
     public void addMedication(){
         if (validateInput()){
+            showLoadingState("Adding");
+
             String medicTitle = title.getText().toString();
             String medicDesc = desc.getText().toString();
 
             long startDateLong = DateUtils.dateStringToLong(startDate.getText().toString());
             long endDateLong = DateUtils.dateStringToLong(endDate.getText().toString());
 
-            Medication medication = new Medication(
-                    medicTitle, DateUtils.getMonthString(startDateLong),
-                    medicDesc, Calendar.getInstance().getTimeInMillis(),
-                    startDateLong, endDateLong, Integer.valueOf(intervalValue.getText().toString()),
-                    intervalSpinner.getSelectedItem().toString()
-            );
+            if (isUpdate) {
+                Medication medication = new Medication(oldMedication.getMedicationId(),
+                        medicTitle, DateUtils.getMonthString(startDateLong),
+                        medicDesc, Calendar.getInstance().getTimeInMillis(),
+                        startDateLong, endDateLong, Integer.valueOf(intervalValue.getText().toString()),
+                        intervalSpinner.getSelectedItem().toString()
+                );
 
-            showLoadingState("Adding");
-            repository.addMedication(medication);
+                repository.updateMedication(medication);
+            } else {
+                Medication medication = new Medication(
+                        medicTitle, DateUtils.getMonthString(startDateLong),
+                        medicDesc, Calendar.getInstance().getTimeInMillis(),
+                        startDateLong, endDateLong, Integer.valueOf(intervalValue.getText().toString()),
+                        intervalSpinner.getSelectedItem().toString()
+                );
+
+                repository.addMedication(medication);
+            }
         }
     }
 
@@ -191,5 +216,40 @@ public class AddMedicationActivity extends BaseActivity
     private void backToList(){
         hideLoadingState();
         onBackPressed();
+    }
+
+    private void setUpEdit(Medication medication) {
+        oldMedication = medication;
+        title.setText(medication.getTitle());
+        desc.setText(medication.getDescription());
+        startDate.setText(getDateString(medication.getStartDate()));
+        endDate.setText(getDateString(medication.getEndDate()));
+        intervalValue.setText(String.valueOf(medication.getIntervalValue()));
+        intervalSpinner.setSelection(setSpinnerSelection(medication.getIntervalType()));
+    }
+
+    private int setSpinnerSelection(String intervalType) {
+        switch (intervalType){
+            case "Minutes":
+                return 0;
+            case "Hours":
+                return 1;
+            case "Days":
+                return 2;
+        }
+        return 0;
+    }
+
+    private String getDateString(Calendar calendar){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
+                Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
+    }
+
+    private String getDateString(long calendar){
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(calendar);
+
+        return getDateString(cal);
     }
 }

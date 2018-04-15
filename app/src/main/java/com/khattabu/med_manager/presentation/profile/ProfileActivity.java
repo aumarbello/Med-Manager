@@ -66,7 +66,16 @@ public class ProfileActivity extends BaseActivity {
 
     @OnClick(R.id.button_save_changes)
     public void saveChanges(){
+        String first = firstName.getText().toString();
+        String last = lastName.getText().toString();
+        String email = emailAddress.getText().toString();
 
+        User user = new User();
+        user.setFirstName(first);
+        user.setLastName(last);
+        user.setEmailAddress(email);
+
+        repository.setUser(user);
     }
 
     private void setUp() {

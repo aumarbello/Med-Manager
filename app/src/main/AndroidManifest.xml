@@ -41,5 +41,8 @@
         <activity android:name=".presentation.detail.DetailActivity" />
         <activity android:name=".presentation.profile.ProfileActivity" />
         <activity android:name=".presentation.list.MedicationList" />
+
+        <service android:name=".utils.NotificationService" />
+        <receiver android:name=".utils.NotificationsReceiver" />
     </application>
 </manifest>

@@ -8,6 +8,6 @@ import com.khattabu.med_manager.presentation.base.BaseViewContract;
  */
 
 public interface AddMedicationViewContract extends BaseViewContract {
-    void onMedicationAdded();
+    void onMedicationAdded(Medication medication);
     void onMedicationUpdated(Medication medication);
 }

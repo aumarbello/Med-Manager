@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
+import com.khattabu.med_manager.utils.AlarmUtils;
 import com.khattabu.med_manager.utils.DateUtils;
 import com.tsongkha.spinnerdatepicker.DatePicker;
 import com.tsongkha.spinnerdatepicker.DatePickerDialog;
@@ -113,12 +114,15 @@ public class AddMedicationActivity extends BaseActivity
     }
 
     @Override
-    public void onMedicationAdded() {
+    public void onMedicationAdded(Medication medication) {
+        AlarmUtils.setAlarm(this, medication);
         backToList();
     }
 
     @Override
     public void onMedicationUpdated(Medication medication) {
+        AlarmUtils.setAlarm(this, medication);
+
         Intent intent = getIntent();
         intent.putExtra(EXTRA_MEDICATION, medication);
         setResult(RESULT_OK, intent);

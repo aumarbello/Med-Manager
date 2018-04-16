@@ -49,7 +49,7 @@ public class DetailRepository{
         Disposable disposable = Single.fromCallable(() -> DAO.deleteMedication(medication))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(integer -> viewContract.onMedicationDeleted(),
+                .subscribe(integer -> viewContract.onMedicationDeleted(medication),
                         throwable -> {
                             viewContract.onError("Medication not deleted, try again later.");
                             AppLogger.e(throwable);

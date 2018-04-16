@@ -29,6 +29,7 @@ import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.add.AddMedicationActivity;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
+import com.khattabu.med_manager.utils.AlarmUtils;
 import com.khattabu.med_manager.utils.DateUtils;
 
 import java.util.Calendar;
@@ -106,7 +107,9 @@ public class DetailActivity extends BaseActivity implements DetailViewContract{
     }
 
     @Override
-    public void onMedicationDeleted() {
+    public void onMedicationDeleted(Medication medication) {
+        AlarmUtils.removeAlarm(this, medication);
+
         onBackPressed();
     }
 

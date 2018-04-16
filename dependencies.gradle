@@ -32,7 +32,6 @@ ext {
     pagingVersion = '1.0.0-beta1'
     pagingRxVersion = '1.0.0-alpha1'
     rxAndroidVersion = '2.0.1'
-    firebaseSchedulerVersion = '0.8.5'
 
     //Test versions
     jUnitVersion = '4.12'
@@ -78,7 +77,6 @@ ext {
             timber : "com.jakewharton.timber:timber:${timberVersion}",
             googleLogin : "com.google.android.gms:play-services-auth:${playServicesVersion}",
             spinnerDialog : "com.github.drawers:SpinnerDatePicker:${spinnerDialogVersion}",
-            firebaseJobScheduler : "com.firebase:firebase-jobdispatcher:${firebaseSchedulerVersion}"
     ]
 
     testDependencies = [

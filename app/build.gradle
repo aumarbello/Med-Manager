@@ -64,6 +64,7 @@ dependencies {
     implementation otherDep.timber
     implementation otherDep.googleLogin
     implementation otherDep.spinnerDialog
+    implementation otherDep.firebaseJobScheduler
 
     testImplementation testDep.jUnit
     testImplementation testDep.mockito

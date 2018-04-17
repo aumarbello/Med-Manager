@@ -27,7 +27,7 @@ import android.content.Intent;
 public class NotificationsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-//        intent.setClass(context, NotificationService.class);
+        intent.setClass(context, NotificationService.class);
         NotificationService.enqueueWork(context, intent);
     }
 }

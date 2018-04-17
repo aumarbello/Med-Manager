@@ -17,9 +17,11 @@
 package com.khattabu.med_manager.utils;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.JobIntentService;
 
@@ -56,8 +58,9 @@ public class NotificationService extends JobIntentService {
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
-        Medication medication = (Medication) intent
-                .getSerializableExtra(DetailActivity.EXTRA_MEDICATION);
+        Bundle args = intent.getBundleExtra(AlarmUtils.MEDIC_EXTRA);
+
+        Medication medication = (Medication) args.getSerializable(DetailActivity.EXTRA_MEDICATION);
 
 
         sendNotification(medication);
@@ -82,6 +85,13 @@ public class NotificationService extends JobIntentService {
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_medication)
                 .setContentIntent(pI);
+
+        NotificationManager manager = (NotificationManager)
+                getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (manager != null){
+            manager.notify(JOB_ID, notificationBuilder.build());
+        }
     }
 
     private String getNotificationText(Medication medication){

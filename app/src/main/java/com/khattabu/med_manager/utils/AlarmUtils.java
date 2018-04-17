@@ -20,6 +20,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
@@ -29,15 +30,21 @@ import com.khattabu.med_manager.presentation.detail.DetailActivity;
  */
 
 public final class AlarmUtils {
+    private static final int ALARM_CODE = 4121;
+    static final String MEDIC_EXTRA = "ALARM_MEDICATION";
+
     public static void setAlarm(Context context, Medication medication){
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         if (manager != null){
+            Bundle args = new Bundle();
+            args.putSerializable(DetailActivity.EXTRA_MEDICATION, medication);
+
             Intent intent = new Intent(context, NotificationsReceiver.class);
-            intent.putExtra(DetailActivity.EXTRA_MEDICATION, medication);
+            intent.putExtra(MEDIC_EXTRA, args);
             intent.setAction(medication.getMedicationId());
 
-            PendingIntent pI = PendingIntent.getBroadcast(context, 0, intent,
+            PendingIntent pI = PendingIntent.getBroadcast(context, ALARM_CODE, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             manager.setRepeating(AlarmManager.RTC_WAKEUP,
@@ -49,11 +56,14 @@ public final class AlarmUtils {
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         if (manager != null){
+            Bundle args = new Bundle();
+            args.putSerializable(DetailActivity.EXTRA_MEDICATION, medication);
+
             Intent intent = new Intent(context, NotificationsReceiver.class);
-            intent.putExtra(DetailActivity.EXTRA_MEDICATION, medication);
+            intent.putExtra(MEDIC_EXTRA, args);
             intent.setAction(medication.getMedicationId());
 
-            PendingIntent pI = PendingIntent.getBroadcast(context, 0, intent,
+            PendingIntent pI = PendingIntent.getBroadcast(context, ALARM_CODE, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             manager.cancel(pI);

@@ -18,6 +18,7 @@ package com.khattabu.med_manager.presentation.add;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -26,18 +27,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.utils.AlarmUtils;
 import com.khattabu.med_manager.utils.DateUtils;
-import com.tsongkha.spinnerdatepicker.DatePicker;
-import com.tsongkha.spinnerdatepicker.DatePickerDialog;
-import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -53,7 +52,8 @@ import static com.khattabu.med_manager.presentation.detail.DetailActivity.EXTRA_
  */
 
 public class AddMedicationActivity extends BaseActivity
-        implements DatePickerDialog.OnDateSetListener, AddMedicationViewContract{
+        implements SingleDateAndTimePickerDialog.Listener,
+        AddMedicationViewContract{
 
     @Inject AddMedicationRepository repository;
 
@@ -71,7 +71,7 @@ public class AddMedicationActivity extends BaseActivity
 
     @BindView(R.id.button_add_medication) Button addMedication;
 
-    private DatePickerDialog datePicker;
+    private SingleDateAndTimePickerDialog datePicker;
     private TextView textView;
     private boolean isUpdate;
     private Medication oldMedication;
@@ -105,11 +105,10 @@ public class AddMedicationActivity extends BaseActivity
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        Calendar selectedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-
+    public void onDateSelected(Date date) {
         if (textView != null){
-            textView.setText(getDateString(selectedDate));
+            textView.setText(getDateString(date.getTime()));
+            textView.setTag(date);
         }
     }
 
@@ -134,12 +133,12 @@ public class AddMedicationActivity extends BaseActivity
 
     @OnClick(R.id.text_start_date)
     public void selectStartDate(){
-        showDateDialog(startDate);
+        showDateDialog(startDate, "Start Date");
     }
 
     @OnClick(R.id.text_end_date)
     public void selectEndDate(){
-        showDateDialog(endDate);
+        showDateDialog(endDate, "End Date");
     }
 
     @OnClick(R.id.button_add_medication)
@@ -150,8 +149,8 @@ public class AddMedicationActivity extends BaseActivity
             String medicTitle = title.getText().toString();
             String medicDesc = desc.getText().toString();
 
-            long startDateLong = DateUtils.dateStringToLong(startDate.getText().toString());
-            long endDateLong = DateUtils.dateStringToLong(endDate.getText().toString());
+            long startDateLong = ((Date)startDate.getTag()).getTime();
+            long endDateLong = ((Date)endDate.getTag()).getTime();
 
             if (isUpdate) {
                 Medication medication = new Medication(oldMedication.getMedicationId(),
@@ -175,23 +174,20 @@ public class AddMedicationActivity extends BaseActivity
         }
     }
 
-    private void showDateDialog(TextView textView) {
+    private void showDateDialog(TextView textView, String title) {
         this.textView = textView;
-        if (datePicker != null && datePicker.isShowing())
+        if (datePicker != null && datePicker.isDisplaying())
             return;
 
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
-
-        datePicker = new SpinnerDatePickerDialogBuilder()
-                .context(this)
-                .callback(this)
-                .defaultDate(year, month, day)
+        datePicker = new SingleDateAndTimePickerDialog.Builder(this)
+                .defaultDate(new Date())
+                .title(title)
+                .minutesStep(15)
+                .listener(this)
+                .mainColor(Color.parseColor("#00BAFF"))
                 .build();
 
-        datePicker.show();
+        datePicker.display();
     }
 
     private boolean validateInput(){
@@ -250,16 +246,11 @@ public class AddMedicationActivity extends BaseActivity
         return 0;
     }
 
-    private String getDateString(Calendar calendar){
+    private String getDateString(long calendar){
+        Date date = new Date(calendar);
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
                 Locale.getDefault());
-        return dateFormat.format(calendar.getTime());
-    }
-
-    private String getDateString(long calendar){
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(calendar);
-
-        return getDateString(cal);
+        return dateFormat.format(date);
     }
 }

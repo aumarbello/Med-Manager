@@ -26,7 +26,6 @@ import android.view.MenuItem;
 
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
-import com.khattabu.med_manager.data.model.MedicationStatus;
 import com.khattabu.med_manager.presentation.add.AddMedicationActivity;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
@@ -95,11 +94,6 @@ public class MedicationList extends BaseActivity
     @Override
     public void setMedicationList(List<Medication> medicationList) {
         adapter.setList(medicationList);
-    }
-
-    @Override
-    public void onMedicationChanged(Medication medication, MedicationStatus status) {
-
     }
 
     @OnClick(R.id.fab_add_medication)

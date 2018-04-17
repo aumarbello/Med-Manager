@@ -1,7 +1,6 @@
 package com.khattabu.med_manager.presentation.list;
 
 import com.khattabu.med_manager.data.model.Medication;
-import com.khattabu.med_manager.data.model.MedicationStatus;
 import com.khattabu.med_manager.presentation.base.BaseViewContract;
 
 import java.util.List;
@@ -12,5 +11,4 @@ import java.util.List;
 
 public interface ListViewContract extends BaseViewContract {
     void setMedicationList(List<Medication> medicationList);
-    void onMedicationChanged(Medication medication, MedicationStatus status);
 }

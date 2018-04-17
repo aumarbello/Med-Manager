@@ -20,6 +20,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.khattabu.med_manager">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
     <application
         android:name=".presentation.MedManager"
         android:allowBackup="false"
@@ -38,7 +40,8 @@
         </activity>
         <activity android:name=".presentation.login.LoginActivity" />
         <activity android:name=".presentation.add.AddMedicationActivity" />
-        <activity android:name=".presentation.detail.DetailActivity" />
+        <activity android:name=".presentation.detail.DetailActivity"
+            android:launchMode="singleTop"/>
         <activity android:name=".presentation.profile.ProfileActivity" />
         <activity android:name=".presentation.list.MedicationList" />
 

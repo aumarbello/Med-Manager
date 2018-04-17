@@ -115,12 +115,14 @@ public class AddMedicationActivity extends BaseActivity
 
     @Override
     public void onMedicationAdded(Medication medication) {
+        hideLoadingState();
         AlarmUtils.setAlarm(this, medication);
         backToList();
     }
 
     @Override
     public void onMedicationUpdated(Medication medication) {
+        hideLoadingState();
         AlarmUtils.setAlarm(this, medication);
 
         Intent intent = getIntent();

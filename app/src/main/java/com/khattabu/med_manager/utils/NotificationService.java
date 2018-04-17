@@ -26,8 +26,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.JobIntentService;
 
 import com.khattabu.med_manager.R;
+import com.khattabu.med_manager.data.local.db.MedicationDAO;
 import com.khattabu.med_manager.data.local.pref.MedicationPreference;
 import com.khattabu.med_manager.data.model.Medication;
+import com.khattabu.med_manager.di.component.DaggerActivityComponent;
+import com.khattabu.med_manager.di.modules.ActivityModule;
 import com.khattabu.med_manager.presentation.MedManager;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
 
@@ -43,6 +46,9 @@ public class NotificationService extends JobIntentService {
     @Inject
     MedicationPreference preference;
 
+    @Inject
+    MedicationDAO dao;
+
     static final int JOB_ID = 312;
 
     static void enqueueWork(Context context,Intent work){
@@ -53,7 +59,11 @@ public class NotificationService extends JobIntentService {
     public void onCreate() {
         super.onCreate();
 
-        ((MedManager)getApplicationContext()).getComponent().inject(this);
+        DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule())
+                .appComponent(((MedManager)getApplication()).getComponent())
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -62,8 +72,16 @@ public class NotificationService extends JobIntentService {
 
         Medication medication = (Medication) args.getSerializable(DetailActivity.EXTRA_MEDICATION);
 
+        if (DateUtils.endDatePast(medication)){
+            deleteMedication(medication);
+        }else
+            sendNotification(medication);
+    }
 
-        sendNotification(medication);
+    private void deleteMedication(Medication medication) {
+        dao.deleteMedication(medication);
+
+        AlarmUtils.removeAlarm(this, medication);
     }
 
     private void sendNotification(Medication medication) {

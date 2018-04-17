@@ -16,6 +16,8 @@
 
 package com.khattabu.med_manager.utils;
 
+import com.khattabu.med_manager.data.model.Medication;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -87,5 +89,10 @@ public final class DateUtils {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMMMMMMM",
                 Locale.getDefault());
         return dateFormat.format(calendar.getTime());
+    }
+
+    static boolean endDatePast(Medication medication) {
+        long currentDate = Calendar.getInstance().getTimeInMillis();
+        return currentDate > medication.getEndDate();
     }
 }

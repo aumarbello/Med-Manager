@@ -23,15 +23,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.JobIntentService;
 
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
 import com.khattabu.med_manager.data.local.pref.MedicationPreference;
 import com.khattabu.med_manager.data.model.Medication;
-import com.khattabu.med_manager.di.component.DaggerActivityComponent;
-import com.khattabu.med_manager.di.modules.ActivityModule;
-import com.khattabu.med_manager.presentation.MedManager;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
 
 import java.util.Locale;
@@ -42,12 +38,10 @@ import javax.inject.Inject;
  * Created by ahmed on 4/16/18.
  */
 
-public class NotificationService extends JobIntentService {
-    @Inject
-    MedicationPreference preference;
+public class NotificationService extends BaseService {
+    @Inject MedicationPreference preference;
 
-    @Inject
-    MedicationDAO dao;
+    @Inject MedicationDAO dao;
 
     static final int JOB_ID = 312;
 
@@ -59,11 +53,7 @@ public class NotificationService extends JobIntentService {
     public void onCreate() {
         super.onCreate();
 
-        DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule())
-                .appComponent(((MedManager)getApplication()).getComponent())
-                .build()
-                .inject(this);
+        getComponent().inject(this);
     }
 
     @Override

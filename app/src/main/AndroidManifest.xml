@@ -21,6 +21,7 @@
     package="com.khattabu.med_manager">
 
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:name=".presentation.MedManager"
@@ -47,6 +48,16 @@
         <activity android:name=".presentation.search.SearchActivity" />
 
         <service android:name=".utils.NotificationService" />
+        <service android:name=".utils.RestartAlarmService" />
+
         <receiver android:name=".utils.NotificationsReceiver" />
+        <receiver android:name=".utils.BootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+            <action
+                android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

@@ -16,7 +16,6 @@
 
 package com.khattabu.med_manager.utils;
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

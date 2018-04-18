@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -30,6 +31,7 @@ import com.khattabu.med_manager.presentation.add.AddMedicationActivity;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
 import com.khattabu.med_manager.presentation.profile.ProfileActivity;
+import com.khattabu.med_manager.presentation.search.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +75,31 @@ public class MedicationList extends BaseActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_medication_list, menu);
+
+        MenuItem item = menu.findItem(R.id.menu_search_medication);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setQueryHint(getString(R.string.title_search_hint));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = SearchActivity.getStartIntent(MedicationList.this, query);
+                startNextActivity(intent);
+
+                searchView.clearFocus();
+                searchView.setQuery("", false);
+                searchView.setIconified(true);
+
+                item.collapseActionView();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         return true;
     }
 

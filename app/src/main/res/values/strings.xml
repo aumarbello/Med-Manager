@@ -51,4 +51,6 @@
     <string name="title_loading">Loading</string>
     <string name="title_profile">Profile</string>
     <string name="action_update_medication">Update Medication</string>
+    <string name="title_search_hint">Enter Month or Medication Name</string>
+    <string name="action_sign_out">Sign Out</string>
 </resources>

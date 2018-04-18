@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.khattabu.med_manager.presentation.list;
+package com.khattabu.med_manager.presentation.search;
 
 import com.khattabu.med_manager.data.model.Medication;
+import com.khattabu.med_manager.presentation.base.BaseViewContract;
+
+import java.util.List;
 
 /**
- * Created by ahmed on 4/10/18.
+ * Created by ahmed on 4/18/18.
  */
 
-public interface MedicationCallBack {
-    void openDetailedMedication(Medication medication);
+public interface SearchViewContract extends BaseViewContract {
+    void onSearchComplete(List<Medication>  medicationList);
 }

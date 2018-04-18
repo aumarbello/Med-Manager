@@ -23,6 +23,7 @@ import com.khattabu.med_manager.presentation.detail.DetailActivity;
 import com.khattabu.med_manager.presentation.list.MedicationList;
 import com.khattabu.med_manager.presentation.login.LoginActivity;
 import com.khattabu.med_manager.presentation.profile.ProfileActivity;
+import com.khattabu.med_manager.presentation.search.SearchActivity;
 import com.khattabu.med_manager.utils.NotificationService;
 
 import dagger.Component;
@@ -39,4 +40,5 @@ public interface ActivityComponent {
     void inject(ProfileActivity profileActivity);
     void inject(AddMedicationActivity addMedicationActivity);
     void inject(NotificationService service);
+    void inject(SearchActivity searchActivity);
 }

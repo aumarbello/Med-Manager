@@ -149,23 +149,30 @@ public class AddMedicationActivity extends BaseActivity
             String medicTitle = title.getText().toString();
             String medicDesc = desc.getText().toString();
 
-            long startDateLong = ((Date)startDate.getTag()).getTime();
-            long endDateLong = ((Date)endDate.getTag()).getTime();
-
             if (isUpdate) {
+                long startDateLong = startDate.getTag() == null ?
+                        oldMedication.getStartDate() : ((Date)startDate.getTag()).getTime();
+                long endDateLong = endDate.getTag() == null ?
+                        oldMedication.getEndDate() : ((Date)endDate.getTag()).getTime();
+
                 Medication medication = new Medication(oldMedication.getMedicationId(),
                         medicTitle, DateUtils.getMonthString(startDateLong),
                         medicDesc, Calendar.getInstance().getTimeInMillis(),
-                        startDateLong, endDateLong, Integer.valueOf(intervalValue.getText().toString()),
+                        startDateLong, endDateLong,
+                        Integer.valueOf(intervalValue.getText().toString()),
                         intervalSpinner.getSelectedItem().toString()
                 );
 
                 repository.updateMedication(medication);
             } else {
+                long startDateLong = ((Date)startDate.getTag()).getTime();
+                long endDateLong = ((Date)endDate.getTag()).getTime();
+
                 Medication medication = new Medication(
                         medicTitle, DateUtils.getMonthString(startDateLong),
                         medicDesc, Calendar.getInstance().getTimeInMillis(),
-                        startDateLong, endDateLong, Integer.valueOf(intervalValue.getText().toString()),
+                        startDateLong, endDateLong,
+                        Integer.valueOf(intervalValue.getText().toString()),
                         intervalSpinner.getSelectedItem().toString()
                 );
 

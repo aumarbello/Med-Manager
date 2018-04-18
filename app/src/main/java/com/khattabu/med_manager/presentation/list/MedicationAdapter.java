@@ -36,11 +36,11 @@ import butterknife.ButterKnife;
  * Created by ahmed on 4/10/18.
  */
 
-class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.MedicationHolder>{
+public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.MedicationHolder>{
     private final List<Medication> MEDICATION_LIST;
     private final MedicationCallBack CALL_BACK;
 
-    MedicationAdapter(List<Medication> medicationList, MedicationCallBack callBack) {
+    public MedicationAdapter(List<Medication> medicationList, MedicationCallBack callBack) {
         MEDICATION_LIST = medicationList;
         CALL_BACK = callBack;
     }

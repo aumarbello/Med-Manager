@@ -17,7 +17,7 @@
   -->
 
 <resources>
-    <string name="app_name">Med-Manager</string>
+    <string name="app_name">Med Manager</string>
     <string name="app_info">App Info</string>
 
     <string name="login_email_address">Email Address</string>

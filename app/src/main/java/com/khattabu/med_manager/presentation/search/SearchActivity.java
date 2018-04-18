@@ -77,6 +77,7 @@ public class SearchActivity extends BaseActivity
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_SEARCH)){
             String searchQuery = intent.getStringExtra(EXTRA_SEARCH);
+            showLoadingState("Searching for " + searchQuery + "...");
             repository.searchMedications(searchQuery);
         }
 
@@ -88,6 +89,7 @@ public class SearchActivity extends BaseActivity
 
     @Override
     public void onSearchComplete(List<Medication> medicationList) {
+        hideLoadingState();
         if (medicationList.isEmpty()){
             onError("Search Parameter does not match any medication");
             return;

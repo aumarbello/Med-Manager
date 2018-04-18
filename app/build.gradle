@@ -55,8 +55,6 @@ dependencies {
     implementation archComponentsDep.room
     implementation archComponentsDep.roomRxJava
     annotationProcessor archComponentsDep.roomProcessor
-    implementation archComponentsDep.paging
-    implementation archComponentsDep.pagingRx
     implementation archComponentsDep.rxAndroid
 
     implementation otherDep.constraintLayout
@@ -67,7 +65,7 @@ dependencies {
 
     testImplementation testDep.jUnit
     testImplementation testDep.mockito
-    testImplementation testDep.liveData
+    androidTestImplementation testDep.liveData
     testImplementation testDep.roomTesting
     testAnnotationProcessor daggerDep.daggerApt
     androidTestImplementation testDep.espressoCore

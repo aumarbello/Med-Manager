@@ -34,14 +34,10 @@ public abstract class MedicationDatabase extends RoomDatabase {
     public static MedicationDatabase getDatabase(Context context){
         if (INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                    MedicationDatabase.class, "medication-database")
+                    MedicationDatabase.class, "medication-database.db")
                     .build();
         }
 
         return INSTANCE;
-    }
-
-    public static void destroyInstance(){
-        INSTANCE = null;
     }
 }

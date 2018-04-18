@@ -37,7 +37,6 @@ public class RestartAlarmService extends BaseService {
     static final int JOB_ID = 124;
 
     static void enqueueWork(Context context, Intent work){
-        AppLogger.d("Enqueue Work Called");
         enqueueWork(context, RestartAlarmService.class, JOB_ID, work);
     }
 

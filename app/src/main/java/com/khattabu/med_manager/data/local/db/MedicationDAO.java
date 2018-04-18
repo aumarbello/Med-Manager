@@ -48,7 +48,7 @@ public interface MedicationDAO {
 
     @Query("SELECT * FROM medication WHERE title LIKE :searchQuery" +
             " OR month LIKE :searchQuery")
-    List<Medication> searchMedications(String searchQuery);
+    Flowable<List<Medication>> searchMedications(String searchQuery);
 
     @Query("SELECT COUNT (*) FROM medication")
     int getMedicationCount();

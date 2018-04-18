@@ -20,10 +20,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
@@ -52,6 +54,10 @@ public class SearchActivity extends BaseActivity
     @BindView(R.id.recycler_view_medication) RecyclerView medicationList;
 
     @BindView(R.id.fab_add_medication) FloatingActionButton addMedication;
+
+    @BindView(R.id.empty_view) ConstraintLayout emptyView;
+
+    @BindView(R.id.empty_text) TextView emptyText;
 
     private MedicationAdapter adapter;
     private static final String EXTRA_SEARCH = "com.khattabu.med_manager.EXTRA_SEARCH";
@@ -91,9 +97,12 @@ public class SearchActivity extends BaseActivity
     public void onSearchComplete(List<Medication> medicationList) {
         hideLoadingState();
         if (medicationList.isEmpty()){
-            onError("Search Parameter does not match any medication");
+            emptyView.setVisibility(View.VISIBLE);
+            emptyText.setText(R.string.empty_search_results);
             return;
         }
+
+        emptyView.setVisibility(View.GONE);
         adapter.setList(medicationList);
     }
 

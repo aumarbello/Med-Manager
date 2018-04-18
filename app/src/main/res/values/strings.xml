@@ -53,4 +53,6 @@
     <string name="action_update_medication">Update Medication</string>
     <string name="title_search_hint">Enter Month or Medication Name</string>
     <string name="action_sign_out">Sign Out</string>
+    <string name="empty_text">No Medication Added Yet, Touch the add button to add.</string>
+    <string name="empty_search_results">Search Parameter does not match any medication</string>
 </resources>

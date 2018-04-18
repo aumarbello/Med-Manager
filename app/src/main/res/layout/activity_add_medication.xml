@@ -20,7 +20,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/plain_back">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +75,7 @@
             android:textColor="@color/black"
             android:text="@string/title_select_date"
             android:layout_margin="@dimen/side_margin_normal"
-            android:drawablePadding="@dimen/side_margin_small"
+            fontPath="fonts/Roboto-Regular.ttf"
             />
 
         <LinearLayout
@@ -117,6 +118,7 @@
             android:text="@string/title_interval"
             android:layout_marginStart="@dimen/side_margin_normal"
             android:layout_marginTop="@dimen/side_margin_large"
+            fontPath="fonts/Roboto-Regular.ttf"
             />
 
         <LinearLayout
@@ -125,6 +127,7 @@
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/side_margin_normal"
             android:layout_marginEnd="@dimen/side_margin_normal"
+            android:layout_marginTop="@dimen/side_margin_small"
             android:weightSum="2">
 
             <EditText

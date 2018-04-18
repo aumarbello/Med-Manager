@@ -49,6 +49,12 @@ public class MedicationPreference {
     }
 
     public void setUser(User user){
+        if (user == null){
+            setEmailAddress(null);
+            setFirstName(null);
+            setLastName(null);
+            return;
+        }
         setEmailAddress(user.getEmailAddress());
         setFirstName(user.getFirstName());
         setLastName(user.getLastName());

@@ -17,6 +17,7 @@
 package com.khattabu.med_manager.presentation.list;
 
 import com.khattabu.med_manager.data.local.db.MedicationDAO;
+import com.khattabu.med_manager.data.local.pref.MedicationPreference;
 import com.khattabu.med_manager.utils.AppLogger;
 
 import java.util.ArrayList;
@@ -33,11 +34,13 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ListRepository {
     private final MedicationDAO DAO;
+    private final MedicationPreference preference;
     private ListViewContract viewContract;
 
     @Inject
-    public ListRepository(MedicationDAO DAO) {
+    ListRepository(MedicationDAO DAO, MedicationPreference preference) {
         this.DAO = DAO;
+        this.preference = preference;
     }
 
     void onAttach(ListViewContract viewContract){
@@ -58,5 +61,9 @@ public class ListRepository {
                 });
 
         viewContract.addDisposable(disposable);
+    }
+
+    void invalidateUser() {
+        preference.setUser(null);
     }
 }

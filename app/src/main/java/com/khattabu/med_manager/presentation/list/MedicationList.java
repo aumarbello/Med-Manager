@@ -19,17 +19,23 @@ package com.khattabu.med_manager.presentation.list;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.khattabu.med_manager.R;
 import com.khattabu.med_manager.data.model.Medication;
 import com.khattabu.med_manager.presentation.add.AddMedicationActivity;
 import com.khattabu.med_manager.presentation.base.BaseActivity;
 import com.khattabu.med_manager.presentation.detail.DetailActivity;
+import com.khattabu.med_manager.presentation.login.LoginActivity;
 import com.khattabu.med_manager.presentation.profile.ProfileActivity;
 import com.khattabu.med_manager.presentation.search.SearchActivity;
 
@@ -53,7 +59,10 @@ public class MedicationList extends BaseActivity
 
     @BindView(R.id.recycler_view_medication) RecyclerView medicationList;
 
+    @BindView(R.id.empty_view) ConstraintLayout emptyView;
+
     private MedicationAdapter adapter;
+    private GoogleSignInClient client;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +79,13 @@ public class MedicationList extends BaseActivity
         medicationList.setAdapter(adapter);
         medicationList.setLayoutManager(new LinearLayoutManager(this));
         setAppTitle("Home");
+
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder
+                (GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        client = GoogleSignIn.getClient(this, options);
     }
 
     @Override
@@ -109,6 +125,12 @@ public class MedicationList extends BaseActivity
             Intent intent = new Intent(this, ProfileActivity.class);
             startNextActivity(intent);
             return true;
+        }else if (item.getItemId() == R.id.menu_sign_out){
+            Intent intent = new Intent(this, LoginActivity.class);
+            invalidateUser();
+            startNextActivity(intent);
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -120,6 +142,12 @@ public class MedicationList extends BaseActivity
 
     @Override
     public void setMedicationList(List<Medication> medicationList) {
+        if (medicationList.isEmpty()){
+            emptyView.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        emptyView.setVisibility(View.GONE);
         adapter.setList(medicationList);
     }
 
@@ -127,5 +155,10 @@ public class MedicationList extends BaseActivity
     public void addMedication(){
         Intent intent = new Intent(this, AddMedicationActivity.class);
         startNextActivity(intent);
+    }
+
+    private void invalidateUser() {
+        client.signOut();
+        repository.invalidateUser();
     }
 }

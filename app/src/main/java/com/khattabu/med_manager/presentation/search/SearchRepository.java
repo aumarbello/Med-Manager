@@ -36,7 +36,7 @@ public class SearchRepository {
     private SearchViewContract viewContract;
 
     @Inject
-    public SearchRepository(MedicationDAO DAO){
+    SearchRepository(MedicationDAO DAO){
         this.DAO = DAO;
     }
 

@@ -37,7 +37,7 @@ public class DetailRepository{
     private DetailViewContract viewContract;
 
     @Inject
-    public DetailRepository(MedicationDAO DAO) {
+    DetailRepository(MedicationDAO DAO) {
         this.DAO = DAO;
     }
 

@@ -36,7 +36,7 @@ public class AddMedicationRepository {
     private AddMedicationViewContract viewContract;
 
     @Inject
-    public  AddMedicationRepository(MedicationDAO medicationDAO){
+    AddMedicationRepository(MedicationDAO medicationDAO){
         DAO = medicationDAO;
     }
 

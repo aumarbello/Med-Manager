@@ -20,14 +20,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_splash"
-    android:alpha="0.75"
+    android:background="@color/plain_back"
     android:orientation="vertical">
 
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_app_title"
         android:layout_marginStart="@dimen/side_margin_large"
         android:layout_marginEnd="@dimen/side_margin_large"

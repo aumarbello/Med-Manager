@@ -16,10 +16,10 @@
   ~
   -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/bg_splash"/>
+    <item android:drawable="@color/plain_back"/>
 
     <item>
         <bitmap android:src="@drawable/ic_app_title"
-            android:gravity="bottom|right"/>
+            android:gravity="center"/>
     </item>
 </layer-list>

@@ -59,14 +59,14 @@ public final class DateUtils {
         int beginWeek = beginCalender.get(Calendar.WEEK_OF_YEAR);
         int endWeek = endCalender.get(Calendar.WEEK_OF_YEAR);
 
-        if (beginWeek - endWeek < 1){
+        if (endWeek - beginWeek < 1){
             int beginDay = beginCalender.get(Calendar.DAY_OF_YEAR);
             int endDay = endCalender.get(Calendar.DAY_OF_YEAR);
 
-            return getComparedDate(endDay - beginDay, " Days");
+            return getComparedDate(endDay - beginDay, "Days");
         }
 
-        return getComparedDate(endWeek - beginWeek, " Weeks");
+        return getComparedDate(endWeek - beginWeek, "Weeks");
     }
 
     private static String getComparedDate(int diff, String factor){

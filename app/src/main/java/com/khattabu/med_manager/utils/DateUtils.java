@@ -18,7 +18,6 @@ package com.khattabu.med_manager.utils;
 
 import com.khattabu.med_manager.data.model.Medication;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -28,6 +27,10 @@ import java.util.Locale;
  */
 
 public final class DateUtils {
+    private static final String[] months = new String[]{"January", "February",
+            "March", "April", "May", "June", "July", "August",
+            "September", "October", "November", "December"};
+
     public static String dateLongToString(long dateInMilliseconds){
         String pattern = "EEE, d MMM yyyy";
         Calendar calendar = Calendar.getInstance();
@@ -71,24 +74,13 @@ public final class DateUtils {
         return String.format(Locale.getDefault(), format, diff, factor);
     }
 
-    public static long dateStringToLong(String text) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
-                Locale.getDefault());
-
-        try {
-            return dateFormat.parse(text).getTime();
-        }catch (ParseException ex){
-            return Calendar.getInstance().getTimeInMillis();
-        }
-    }
-
     public static String getMonthString(long startDateLong) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(startDateLong);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMMMMMMM",
-                Locale.getDefault());
-        return dateFormat.format(calendar.getTime());
+        int month = calendar.get(Calendar.MONTH);
+
+        return months[month];
     }
 
     static boolean endDatePast(Medication medication) {

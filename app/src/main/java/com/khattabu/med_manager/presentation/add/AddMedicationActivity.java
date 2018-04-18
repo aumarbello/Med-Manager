@@ -92,7 +92,6 @@ public class AddMedicationActivity extends BaseActivity
         repository.onAttach(this);
 
         shouldShowBackButton();
-        setAppTitle("Add Medication");
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_MEDICATION)){
@@ -102,6 +101,11 @@ public class AddMedicationActivity extends BaseActivity
             Medication medication = (Medication) intent.getSerializableExtra(EXTRA_MEDICATION);
             setUpEdit(medication);
         }
+
+        if (isUpdate){
+            setAppTitle("Edit Medication");
+        }else
+            setAppTitle("Add Medication");
     }
 
     @Override
